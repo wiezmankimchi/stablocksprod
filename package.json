@@ -10,6 +10,12 @@
   "devDependencies": {
     "@redwoodjs/core": "0.41.0"
   },
+  "scripts": {
+    "postgres:up": "docker-compose up -d",
+    "postgres:down": "docker-compose down",
+    "dev": "yarn postgres:down && yarn postgres:up && yarn rw dev",
+    "test": "yarn postgres:down && yarn postgres:up && yarn rw test"
+  },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
     "root": true
