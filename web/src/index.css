@@ -1,4 +1,10 @@
 @import "tailwindcss/base";
 
+html,
+body,
+#redwood-app {
+  @apply h-full bg-gray-100;
+}
+
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
