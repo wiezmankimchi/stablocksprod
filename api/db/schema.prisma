@@ -8,11 +8,245 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Organization {
+  id         String   @id @default(cuid())
+  // General information
+  name       String
+  website    String?
+  logo       String?
+  // Module toggles
+  recruiting Boolean  @default(true)
+  crm        Boolean  @default(true)
+  helpdesk   Boolean  @default(true)
+  projects   Boolean  @default(true)
+  // Times
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}
+
+model User {
+  id              String          @id @default(cuid())
+  firstName       String
+  middleName      String?
+  lastName        String
+  email           String          @unique
+  otherEmails     String[]
+  profileImage    String?
+  userTypes       UserType[]
+  // Organization
+  position        String?
+  departments     Department[]
+  supervisorId    String?
+  supervisor      User?           @relation("SupervisorEmployees", fields: [supervisorId], references: [id])
+  employees       User[]          @relation("SupervisorEmployees")
+  // Payroll
+  amount          Int?
+  type            EmployeePayType @default(salary)
+  // Recruiting
+  jobs            Job[]
+  applications    Application[]
+  resume          String?
+  // CRM
+  contacts        Contact[]
+  contactNotes    ContactNote[]
+  companies       Company[]
+  // Helpdesk
+  ticketsCreated  Ticket[]        @relation("UserTicket")
+  ticketsAssigned Ticket[]        @relation("AssigneeTicket")
+  ticketComments  TicketComment[]
+  // Project Management
+  projects        Project[]
+  tasksCreated    Task[]          @relation("UserTask")
+  tasksAssigned   Task[]          @relation("AssigneeTask")
+  taskComments    TaskComment[]
+  // Times
+  updatedAt       DateTime        @updatedAt
+  createdAt       DateTime        @default(now())
+}
+
+model Department {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  users          User[]
+  department     Department?  @relation("Subdepartments", fields: [departmentId], references: [id])
+  departmentId   String?
+  subDepartments Department[] @relation("Subdepartments")
+  // Times
+  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime     @default(now())
+}
+
+// Jobs and Recruiting
+
+model Job {
+  id           String        @id @default(cuid())
+  title        String
+  description  String
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  applications Application[]
+  // Times
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+}
+
+model Application {
+  id        String            @id @default(cuid())
+  job       Job               @relation(fields: [jobId], references: [id])
+  jobId     String
+  user      User              @relation(fields: [userId], references: [id])
+  userId    String
+  status    ApplicationStatus @default(draft)
+  // Times
+  updatedAt DateTime          @updatedAt
+  createdAt DateTime          @default(now())
+
+  @@unique([jobId, userId])
+}
+
+// CRM
+
+model Contact {
+  id        String        @id @default(cuid())
+  // Contact info
+  firstName String?
+  lastName  String?
+  email     String?
+  phone     Int?
+  company   Company?      @relation(fields: [companyId], references: [id])
+  companyId String?
+  // Internal info
+  user      User          @relation(fields: [userId], references: [id])
+  userId    String
+  notes     ContactNote[]
+  // Times
+  updatedAt DateTime      @updatedAt
+  createdAt DateTime      @default(now())
+}
+
+model ContactNote {
+  id        String   @id @default(cuid())
+  message   String
+  contact   Contact  @relation(fields: [contactId], references: [id])
+  contactId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  // Times
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Company {
+  id        String    @id @default(cuid())
+  name      String
+  website   String?
+  phone     Int?
+  contacts  Contact[]
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  // Times
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+}
+
+// Helpdesk
+
+model Ticket {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      Status   @default(open)
+  user        User     @relation("UserTicket", fields: [userId], references: [id])
+  userId      String
+  assignee    User?    @relation("AssigneeTicket", fields: [assigneeId], references: [id])
+  assigneeId  String?
+  task        Task?    @relation(fields: [taskId], references: [id])
+  taskId      String?
+  // Times
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model TicketComment {
+  id        String   @id @default(cuid())
+  message   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  // Times
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+// Project Management
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  tasks       Task[]
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  // Times
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model Task {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  status      Status        @default(open)
+  project     Project       @relation(fields: [projectId], references: [id])
+  projectId   String
+  user        User          @relation("UserTask", fields: [userId], references: [id])
+  userId      String
+  assignee    User?         @relation("AssigneeTask", fields: [assigneeId], references: [id])
+  assigneeId  String?
+  tickets     Ticket[]
+  comments    TaskComment[]
+  // Times
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+}
+
+model TaskComment {
+  id        String   @id @default(cuid())
+  message   String
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  // Times
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+// Enums
+
+enum UserType {
+  employee
+  contact
+  applicant
+}
+
+enum EmployeePayType {
+  salary
+  hourly
+  contract
+}
+
+enum Status {
+  open
+  pending
+  closed
+  archived
+}
+
+enum ApplicationStatus {
+  draft
+  submitted
+  reviewed
+  offered
+  archived
 }
