@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { useAuth } from '@redwoodjs/auth'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
@@ -24,7 +25,6 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
 ]
 
 function classNames(...classes) {
@@ -37,6 +37,8 @@ type DashboardLayoutProps = {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const { logOut } = useAuth()
 
   return (
     <>
@@ -249,6 +251,19 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                           )}
                         </Menu.Item>
                       ))}
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                            )}
+                            onClick={logOut}
+                          >
+                            Sign out
+                          </button>
+                        )}
+                      </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>

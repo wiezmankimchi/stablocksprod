@@ -18,6 +18,8 @@ Ensure you have a [Netlify](https://netlify.com/) account, then click the button
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/stablocks/stablocks)
 
+Add your Supabase credentials in the environment variables section before you deploy: `SUPABASE_URL`, `SUPABASE_KEY` (public key), and `SUPABASE_JWT_SECRET`. Additionally, add the Supabase database URL for `DATABASE_URL`.
+
 ## About RedwoodJS and local development
 
 Stablocks is meant to be a standalone project and, therefore, you don't need to have your own copy. We manage the development and you host the app. However, if you want to customize your Stablocks project beyond what is provided feel free to fork this repo. We recommend keeping it connected to this repo so you can still get upstream updates.
