@@ -2,6 +2,32 @@
 
 Stablocks seeks to provide an integrated suite of software modules for growing companies and startups. We want to remove the need for managing 34 different SaaS products. To do this, we have identified common functions used across all businesses and removed the excess to bring the basic core functionality to you. The benefits are great: a single app for all of your services, a shared look and feel across the modules, and having all the data be easily integrated from solution to solution.
 
+> Stablocks is currently in active development and is NOT ready for production. However, feel free to explore and contribute!
+
+## Proposed Software Modules
+
+- [ ]  Essentials
+  - [ ] Employee management
+  - [ ] Organization management
+  - [ ] Email (Google Workplace)
+- [ ] CRM
+  - [ ] Contacts management
+  - [ ] Marketing
+  - [ ] Sales
+- [ ] Finance and accounting
+- [ ] HR
+  - [ ] Payroll
+  - [ ] Onboarding
+- [ ] Recruiting
+  - [ ] Job posting and application management
+  - [ ] Public job portal
+- [ ] Helpdesk
+  - [ ] Chat
+  - [ ] Ticketing system
+  - [ ] Public help documentation
+- [ ] Project Management
+  - [ ] Tasks
+
 ## Open-Source
 
 We also believe that this should not be exclusively enterprise software, which is why we have made it open-source. We've carefully chosen a technology stack that is easy to learn and contribute to. The main components are [RedwoodJS](https://redwoodjs.com/) for developing the web front-end and API, and [Supabase](https://supabase.com/) to host the data and handle authentication.
