@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Redirect, routes, RouteFocus } from '@redwoodjs/router'
+import { useContext, useEffect, useState } from 'react'
+import { Redirect, routes, RouteFocus, navigate } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import { Form, Label, TextField, FieldError, Submit } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 import { RiGoogleFill, RiWindowsFill } from 'react-icons/ri'
+import { AppContext } from 'src/components/Providers/AppProviderCell'
 
 const LoginPage = () => {
   const [linkSent, setLinkSent] = useState(false)
   const [email, setEmail] = useState('')
   const { logIn, currentUser } = useAuth()
+  const { organization, userCount } = useContext(AppContext)
 
   const onSubmit = () => {
     logIn({
@@ -19,6 +21,12 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      location.reload()
+    }, 10000)
+  })
+
+  useEffect(() => {
     if (linkSent) {
       setTimeout(() => {
         setLinkSent(false)
@@ -26,10 +34,19 @@ const LoginPage = () => {
     }
   }, [linkSent])
 
+  useEffect(() => {
+    if (currentUser) {
+      navigate(routes.home())
+    }
+  }, [currentUser])
+
+  if (organization && userCount && currentUser) {
+    return <Redirect to={routes.home()} />
+  }
+
   return (
-    <>
+    <main className="h-full">
       <MetaTags title="Login" description="Login page" />
-      {currentUser && <Redirect to={routes.home()} />}
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
@@ -47,12 +64,7 @@ const LoginPage = () => {
             {!linkSent ? (
               <Form className="space-y-6" onSubmit={onSubmit}>
                 <div>
-                  <Label
-                    name="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email address
-                  </Label>
+                  <Label name="email">Email address</Label>
                   <div className="mt-1">
                     <RouteFocus>
                       <TextField
@@ -67,7 +79,6 @@ const LoginPage = () => {
                             message: 'Please enter a valid email address',
                           },
                         }}
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                       <FieldError
                         name="email"
@@ -123,7 +134,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </main>
   )
 }
 

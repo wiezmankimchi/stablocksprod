@@ -1,31 +1,17 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
   MenuAlt2Icon,
-  UsersIcon,
+  OfficeBuildingIcon,
+  UserCircleIcon,
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-]
+import { Link, NavLink, Redirect, routes, useLocation } from '@redwoodjs/router'
+import { AppContext } from 'src/components/Providers/AppProviderCell'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -36,9 +22,31 @@ type DashboardLayoutProps = {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  const { pathname } = useLocation()
+  const { currentUser, logOut } = useAuth()
+  const { search } = useContext(AppContext)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const { logOut } = useAuth()
+  const navigation = [
+    { name: 'Dashboard', href: routes.home(), icon: HomeIcon },
+    {
+      name: 'Organization',
+      href: routes.organization(),
+      icon: OfficeBuildingIcon,
+    },
+  ]
+  const userNavigation = [
+    { name: 'Your Profile', href: routes.profile() },
+    { name: 'Settings', href: '#' },
+  ]
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname])
+
+  if (!currentUser) {
+    return <Redirect to={routes.login()} />
+  }
 
   return (
     <>
@@ -93,25 +101,24 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex-shrink-0 flex items-center px-4">
+                <Link
+                  to={routes.home()}
+                  className="flex-shrink-0 flex items-center px-4"
+                >
                   <img
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
                     alt="Workflow"
                   />
-                </div>
+                </Link>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
+                        to={item.href}
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        activeClassName="bg-gray-900 text-white"
                       >
                         <item.icon
                           className={classNames(
@@ -123,7 +130,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </nav>
                 </div>
@@ -139,25 +146,24 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
-            <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+            <Link
+              to={routes.home()}
+              className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
+            >
               <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
                 alt="Workflow"
               />
-            </div>
+            </Link>
             <div className="flex-1 flex flex-col overflow-y-auto">
               <nav className="flex-1 px-2 py-4 space-y-1">
                 {navigation.map((item) => (
-                  <a
+                  <NavLink
                     key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                    )}
+                    to={item.href}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    activeClassName="bg-gray-900 text-white"
                   >
                     <item.icon
                       className={classNames(
@@ -169,7 +175,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </NavLink>
                 ))}
               </nav>
             </div>
@@ -187,23 +193,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </button>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                <form className="w-full flex md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                {search && (
+                  <form className="w-full flex md:ml-0" action="#" method="GET">
+                    <label htmlFor="search-field" className="sr-only">
+                      Search {search.label}
+                    </label>
+                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+                      <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                        <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <input
+                        id="search-field"
+                        className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+                        placeholder={`Search ${search.label}`}
+                        type="search"
+                        name="search"
+                      />
                     </div>
-                    <input
-                      id="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />
-                  </div>
-                </form>
+                  </form>
+                )}
               </div>
               <div className="ml-4 flex items-center md:ml-6">
                 <button
@@ -217,13 +225,26 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Menu.Button
+                      className={`${
+                        currentUser.profileImage
+                          ? 'max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                          : 'bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                      }`}
+                    >
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      {currentUser.profileImage ? (
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      ) : (
+                        <UserCircleIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -272,7 +293,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </div>
 
           <main className="flex-1">
-            <div className="py-6">{children}</div>
+            <div className="p-6 md:px-12">{children}</div>
           </main>
         </div>
       </div>

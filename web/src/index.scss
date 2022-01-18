@@ -1,0 +1,60 @@
+@import "tailwindcss/base";
+
+html,
+body,
+#redwood-app {
+  @apply h-full bg-gray-100 overflow-x-hidden;
+}
+
+button {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+}
+
+main {
+  label {
+    @apply block mb-1 text-sm font-medium text-gray-700;
+  }
+
+  [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    @apply focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md;
+  }
+
+  [type='checkbox'] {
+    @apply focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded;
+  }
+}
+
+.btn {
+ @apply inline-flex items-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+}
+
+.btn-primary {
+  @apply border-transparent text-white bg-indigo-600 hover:bg-indigo-700;
+}
+
+.btn-group {
+  @apply flex items-center;
+
+  > * {
+    @apply ml-3;
+  }
+
+  >:first-child {
+    @apply ml-0;
+  }
+}
+
+.prepend-field input {
+  @apply rounded-none rounded-r-md shadow-none;
+}
+
+.page-title + [role='tablist'] {
+  @apply -mt-8;
+}
+
+[role='tablist'] button {
+  @apply focus:ring-0 focus:ring-offset-0;
+}
+
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
