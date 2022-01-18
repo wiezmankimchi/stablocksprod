@@ -9,7 +9,7 @@ generator client {
 }
 
 model Organization {
-  id         String   @id @default(cuid())
+  id         Int      @id @default(autoincrement())
   // General information
   name       String
   website    String?
@@ -25,11 +25,11 @@ model Organization {
 }
 
 model User {
-  id              String          @id @default(cuid())
+  id              String           @id @default(cuid())
   firstName       String
   middleName      String?
   lastName        String
-  email           String          @unique
+  email           String           @unique
   otherEmails     String[]
   profileImage    String?
   userTypes       UserType[]
@@ -37,11 +37,11 @@ model User {
   position        String?
   departments     Department[]
   supervisorId    String?
-  supervisor      User?           @relation("SupervisorEmployees", fields: [supervisorId], references: [id])
-  employees       User[]          @relation("SupervisorEmployees")
+  supervisor      User?            @relation("SupervisorEmployees", fields: [supervisorId], references: [id])
+  employees       User[]           @relation("SupervisorEmployees")
   // Payroll
   amount          Int?
-  type            EmployeePayType @default(salary)
+  payType         EmployeePayType? @default(salary)
   // Recruiting
   jobs            Job[]
   applications    Application[]
@@ -51,17 +51,17 @@ model User {
   contactNotes    ContactNote[]
   companies       Company[]
   // Helpdesk
-  ticketsCreated  Ticket[]        @relation("UserTicket")
-  ticketsAssigned Ticket[]        @relation("AssigneeTicket")
+  ticketsCreated  Ticket[]         @relation("UserTicket")
+  ticketsAssigned Ticket[]         @relation("AssigneeTicket")
   ticketComments  TicketComment[]
   // Project Management
   projects        Project[]
-  tasksCreated    Task[]          @relation("UserTask")
-  tasksAssigned   Task[]          @relation("AssigneeTask")
+  tasksCreated    Task[]           @relation("UserTask")
+  tasksAssigned   Task[]           @relation("AssigneeTask")
   taskComments    TaskComment[]
   // Times
-  updatedAt       DateTime        @updatedAt
-  createdAt       DateTime        @default(now())
+  updatedAt       DateTime         @updatedAt
+  createdAt       DateTime         @default(now())
 }
 
 model Department {
@@ -225,6 +225,7 @@ model TaskComment {
 // Enums
 
 enum UserType {
+  admin
   employee
   contact
   applicant

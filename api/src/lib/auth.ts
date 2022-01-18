@@ -1,5 +1,6 @@
 import { parseJWT } from '@redwoodjs/api'
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
+import { db } from 'src/lib/db'
 
 /**
  * Represents the user attributes returned by the decoding the
@@ -36,13 +37,34 @@ export const getCurrentUser = async (
     return null
   }
 
+  let user
+
+  const fetchedUser = await db.user.findUnique({
+    where: { email: decoded.email },
+  })
+
+  if (fetchedUser) {
+    user = fetchedUser
+  } else {
+    const createdUser = await db.user.create({
+      data: {
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        email: decoded.email,
+        userTypes: ['applicant'],
+      },
+    })
+
+    user = createdUser
+  }
+
   const { roles } = parseJWT({ decoded })
 
   if (roles) {
-    return { ...decoded, roles }
+    return { ...user, roles }
   }
 
-  return { ...decoded }
+  return { ...user }
 }
 
 /**
