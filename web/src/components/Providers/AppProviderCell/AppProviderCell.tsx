@@ -1,6 +1,5 @@
 import { Dispatch, createContext, useState } from 'react'
 import { Redirect, routes, useLocation } from '@redwoodjs/router'
-import { Toaster } from '@redwoodjs/web/toast'
 
 import type { FindAppProviderQuery } from 'types/graphql'
 import type { CellSuccessProps } from '@redwoodjs/web'
@@ -61,10 +60,5 @@ export const Success = ({ appProvider, children }: AppProviderSuccessProps) => {
     return <Redirect to={routes.onboarding()} />
   }
 
-  return (
-    <>
-      <Toaster />
-      <AppContext.Provider value={value}>{children}</AppContext.Provider>
-    </>
-  )
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
