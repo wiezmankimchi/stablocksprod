@@ -57,7 +57,10 @@ const User = ({ user }) => {
         name={fullName}
         image={user.profileImage}
         position={user.position}
-        breadcrumbs={[{ title: 'Employees', to: routes.organization() }]}
+        breadcrumbs={[
+          { title: 'Organization', to: routes.organization() },
+          { title: 'Employees', to: routes.employees() },
+        ]}
         currentCrumbLabel={fullName}
         buttons={[
           {
@@ -154,10 +157,6 @@ const User = ({ user }) => {
             <tr>
               <th>Profile image</th>
               <td>{user.profileImage}</td>
-            </tr>
-            <tr>
-              <th>User types</th>
-              <td>{user.userTypes}</td>
             </tr>
             <tr>
               <th>Position</th>

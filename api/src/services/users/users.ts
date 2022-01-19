@@ -16,18 +16,16 @@ export const user = ({ id }: Prisma.UserWhereUniqueInput) => {
 export const employees = () => {
   return db.user.findMany({
     where: {
-      OR: [
-        {
-          userTypes: {
-            has: 'employee',
+      roles: {
+        OR: [
+          {
+            admin: true,
           },
-        },
-        {
-          userTypes: {
-            has: 'admin',
+          {
+            employee: true,
           },
-        },
-      ],
+        ],
+      },
     },
     orderBy: {
       lastName: 'asc',
@@ -39,9 +37,26 @@ interface CreateUserArgs {
   input: Prisma.UserCreateInput
 }
 
-export const createUser = ({ input }: CreateUserArgs) => {
+export const createFirstUser = async ({ input }: CreateUserArgs) => {
+  const getUsers = await users()
+
+  if (getUsers.length > 0) return
+
   return db.user.create({
     data: input,
+  })
+}
+
+export const createUser = ({ input }: CreateUserArgs) => {
+  return db.user.create({
+    data: {
+      ...input,
+      roles: {
+        create: {
+          external: true,
+        },
+      },
+    },
   })
 }
 

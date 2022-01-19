@@ -1,9 +1,8 @@
 import { Link, useLocation } from '@redwoodjs/router'
 
-type LinkType = typeof Link
-
 interface NavLinkProps {
   to: string
+  basePath?: string
   className?: string
   nonActiveClassName?: string
   activeClassName?: string
@@ -13,6 +12,7 @@ interface NavLinkProps {
 const NavLink = React.forwardRef((props: NavLinkProps, ref) => {
   const {
     to,
+    basePath,
     nonActiveClassName,
     activeClassName,
     className,
@@ -21,14 +21,20 @@ const NavLink = React.forwardRef((props: NavLinkProps, ref) => {
   } = props
   const { pathname } = useLocation()
 
-  const active =
-    to === '/'
-      ? pathname === '/'
-        ? true
-        : false
-      : pathname === to
-      ? true
-      : false
+  const isActive = () => {
+    // Home page
+    if (to === '/') {
+      if (pathname === '/') return true
+      return false
+    }
+
+    if (pathname === to) return true
+
+    if (pathname.startsWith(to) && to !== basePath) return true
+
+    return false
+  }
+
   const nonActiveClass = nonActiveClassName || ''
   const activeClass = activeClassName || ''
 
@@ -36,7 +42,7 @@ const NavLink = React.forwardRef((props: NavLinkProps, ref) => {
     <Link
       to={to}
       ref={ref}
-      className={`${active ? activeClass : nonActiveClass} ${className}`}
+      className={`${isActive() ? activeClass : nonActiveClass} ${className}`}
       {...rest}
     >
       {children}

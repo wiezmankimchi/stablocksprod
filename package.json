@@ -13,7 +13,7 @@
   "scripts": {
     "postgres:up": "docker-compose up -d",
     "postgres:down": "docker-compose down",
-    "dev": "yarn postgres:down && yarn postgres:up && yarn rw dev",
+    "dev": "yarn postgres:up && yarn rw dev",
     "test": "yarn postgres:down && yarn postgres:up && yarn rw test"
   },
   "eslintConfig": {

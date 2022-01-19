@@ -223,7 +223,8 @@ model TaskComment {
 }
 
 model Role {
-  userId          String   @id @unique
+  id              String   @id @default(cuid())
+  userId          String   @unique
   user            User     @relation(fields: [userId], references: [id])
   admin           Boolean  @default(false)
   employee        Boolean  @default(false)

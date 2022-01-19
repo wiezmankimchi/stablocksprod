@@ -12,6 +12,21 @@ const LoginPage = () => {
   const { logIn, currentUser } = useAuth()
   const { organization, userCount } = useContext(AppContext)
 
+  const providers = [
+    {
+      name: 'Google',
+      slug: 'google',
+      icon: RiGoogleFill,
+      env: process.env.GOOGLE_AUTH,
+    },
+    {
+      name: 'Microsoft',
+      slug: 'azure',
+      icon: RiWindowsFill,
+      env: process.env.MICROSOFT_AUTH,
+    },
+  ]
+
   const onSubmit = () => {
     logIn({
       email,
@@ -19,12 +34,6 @@ const LoginPage = () => {
       setLinkSent(true)
     })
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      location.reload()
-    }, 10000)
-  })
 
   useEffect(() => {
     if (linkSent) {
@@ -42,6 +51,21 @@ const LoginPage = () => {
 
   if (organization && userCount && currentUser) {
     return <Redirect to={routes.home()} />
+  }
+
+  const findProviders = (): boolean => {
+    let foundProviders = false
+
+    for (let i = 0; i < providers.length; i++) {
+      const provider = providers[i]
+
+      if (provider.env) {
+        foundProviders = true
+        break
+      }
+    }
+
+    return foundProviders
   }
 
   return (
@@ -100,37 +124,38 @@ const LoginPage = () => {
               </p>
             )}
 
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
-                    Or continue with
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-1 gap-3">
-                <div>
-                  <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <RiGoogleFill className="w-5 h-5 mr-2" aria-hidden="true" />
-                    <span className="sr-only">Sign in with </span>Google
-                  </button>
+            {findProviders() && (
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-white text-gray-500">
+                      Or continue with
+                    </span>
+                  </div>
                 </div>
 
-                <div>
-                  <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <RiWindowsFill
-                      className="w-5 h-5 mr-2"
-                      aria-hidden="true"
-                    />
-                    <span className="sr-only">Sign in with </span>Microsoft
-                  </button>
+                <div className="mt-6 grid grid-cols-1 gap-3">
+                  {providers.map(
+                    (provider, i) =>
+                      provider.env && (
+                        <div key={i}>
+                          <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <provider.icon
+                              className="w-5 h-5 mr-2"
+                              aria-hidden="true"
+                            />
+                            <span className="sr-only">Sign in with </span>
+                            {provider.name}
+                          </button>
+                        </div>
+                      )
+                  )}
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

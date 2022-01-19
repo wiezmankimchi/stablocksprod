@@ -6,7 +6,6 @@ import {
   FieldError,
   Form,
   FormError,
-  HiddenField,
   Label,
   Submit,
   TextField,
@@ -16,28 +15,6 @@ const ONBOARDING_CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
       id
-    }
-  }
-`
-
-const ONBOARDING_UPDATE_USER_MUTATION = gql`
-  mutation UpdateUserMutation($id: String!, $input: UpdateUserInput!) {
-    updateUser(id: $id, input: $input) {
-      id
-      firstName
-      middleName
-      lastName
-      email
-      otherEmails
-      profileImage
-      userTypes
-      position
-      supervisorId
-      amount
-      payType
-      resume
-      updatedAt
-      createdAt
     }
   }
 `
@@ -58,25 +35,9 @@ const NewUser = () => {
     }
   )
 
-  const [updateUser, { loading: updateLoading, error: updateError }] =
-    useMutation(ONBOARDING_UPDATE_USER_MUTATION, {
-      onCompleted: () => {
-        toast.success('Account updated')
-        navigate(routes.home())
-      },
-      onError: (error) => {
-        toast.error(error.message)
-      },
-    })
-
   const onSave = (input) => {
-    if (!currentUser?.email) {
-      input.userTypes = ['applicant']
-      createUser({ variables: { input } })
-    } else {
-      delete input.email
-      updateUser({ variables: { id: currentUser.id, input } })
-    }
+    input.email = currentUser.email
+    createUser({ variables: { input } })
   }
 
   if (currentUser.firstName && currentUser.lastName) {
@@ -136,13 +97,6 @@ const NewUser = () => {
                             className="rw-field-error"
                           />
                         </div>
-
-                        <HiddenField
-                          name="email"
-                          defaultValue={currentUser.email.toString()}
-                          className="bg-gray-100"
-                          validation={{ required: true }}
-                        />
                       </div>
                     </div>
                     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

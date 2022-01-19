@@ -5,8 +5,9 @@ import {
   SearchItem,
 } from 'src/components/Providers/AppProviderCell'
 import Breadcrumbs, { Breadcrumb } from 'src/components/Layout/Breadcrumbs'
-
-import type { ActionButton } from 'src/components/Layout/PageTitle'
+import MenuButtonGroup, {
+  ActionButton,
+} from 'src/components/Elements/MenuButtonGroup'
 
 interface UserHeaderProps {
   name: string
@@ -42,7 +43,7 @@ const UserHeader = ({
         breadcrumbs={breadcrumbs}
         currentCrumbLabel={currentCrumbLabel || 'User'}
       />
-      <div className="mb-12 mt-6 md:flex md:items-center md:justify-between md:space-x-5">
+      <div className="mb-12 mt-2 md:flex md:items-center md:justify-between md:space-x-5">
         <div className="flex items-start space-x-5">
           {image && (
             <div className="flex-shrink-0">
@@ -84,19 +85,7 @@ const UserHeader = ({
         </div>
         {buttons && buttons.length && (
           <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-            {buttons.map((button, i) => (
-              <button
-                key={i}
-                onClick={button.onClick}
-                type="button"
-                className={`${i !== 0 ? 'ml-3 ' : ''}${
-                  button.main ? 'btn-primary ' : ''
-                }btn flex items-center justify-center space-x-1`}
-              >
-                {button.icon && <button.icon className="h-4 w-4" />}
-                <span>{button.label}</span>
-              </button>
-            ))}
+            <MenuButtonGroup buttons={buttons} />
           </div>
         )}
       </div>

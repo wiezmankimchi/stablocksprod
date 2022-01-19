@@ -124,22 +124,6 @@ const UserForm = (props) => {
         <FieldError name="profileImage" className="rw-field-error" />
 
         <Label
-          name="userTypes"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          User types
-        </Label>
-        <TextField
-          name="userTypes"
-          defaultValue={props.user?.userTypes}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="userTypes" className="rw-field-error" />
-
-        <Label
           name="position"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -216,10 +200,7 @@ const UserForm = (props) => {
         <FieldError name="resume" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>

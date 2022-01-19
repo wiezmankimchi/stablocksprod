@@ -10,7 +10,8 @@ button {
   @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-100;
 }
 
-main {
+main,
+#headlessui-portal-root {
   label {
     @apply block mb-1 text-sm font-medium text-gray-700;
   }

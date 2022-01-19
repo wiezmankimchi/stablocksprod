@@ -17,7 +17,6 @@ export const QUERY = gql`
       email
       otherEmails
       profileImage
-      userTypes
       position
       supervisorId
       amount
@@ -38,7 +37,6 @@ const UPDATE_USER_MUTATION = gql`
       email
       otherEmails
       profileImage
-      userTypes
       position
       supervisorId
       amount

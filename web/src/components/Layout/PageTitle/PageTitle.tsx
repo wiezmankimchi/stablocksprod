@@ -5,13 +5,9 @@ import {
   SearchItem,
 } from 'src/components/Providers/AppProviderCell'
 import Breadcrumbs, { Breadcrumb } from 'src/components/Layout/Breadcrumbs'
-
-export interface ActionButton {
-  label: React.ReactNode
-  main?: boolean
-  icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
-  onClick: () => void
-}
+import MenuButtonGroup, {
+  ActionButton,
+} from 'src/components/Elements/MenuButtonGroup'
 
 interface PageTitleProps {
   title: string
@@ -52,19 +48,7 @@ const PageTitle = ({
           </div>
           {buttons && buttons.length && (
             <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
-              {buttons.map((button, i) => (
-                <button
-                  key={i}
-                  onClick={button.onClick}
-                  type="button"
-                  className={`${i !== 0 ? 'ml-3 ' : ''}${
-                    button.main ? 'btn-primary ' : ''
-                  }btn flex items-center space-x-1`}
-                >
-                  {button.icon && <button.icon className="h-4 w-4" />}
-                  <span>{button.label}</span>
-                </button>
-              ))}
+              <MenuButtonGroup buttons={buttons} />
             </div>
           )}
         </div>

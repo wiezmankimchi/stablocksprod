@@ -38,22 +38,32 @@ export const getCurrentUser = async (
   }
 
   let user = {}
+  const roles = []
 
   const fetchedUser = await db.user.findUnique({
     where: { email: decoded.email },
+    include: {
+      roles: true,
+    },
   })
 
   if (fetchedUser) {
     user = fetchedUser
+
+    if (fetchedUser.roles) {
+      for (const key in fetchedUser.roles) {
+        if (Object.prototype.hasOwnProperty.call(fetchedUser.roles, key)) {
+          const element = fetchedUser.roles[key]
+
+          if (element === true) roles.push(key)
+        }
+      }
+    }
+  } else {
+    user = decoded
   }
 
-  const { roles } = parseJWT({ decoded })
-
-  if (roles) {
-    return { ...user, roles }
-  }
-
-  return { ...user }
+  return { ...user, roles }
 }
 
 /**

@@ -1,5 +1,6 @@
 export const schema = gql`
   type Role {
+    id: String!
     userId: String!
     user: User!
     admin: Boolean!
@@ -76,6 +77,6 @@ export const schema = gql`
   type Mutation {
     createRole(input: CreateRoleInput!): Role! @requireAuth
     updateRole(id: String!, input: UpdateRoleInput!): Role! @requireAuth
-    deleteRole(id: String!): Role! @requireAuth
+    # deleteRole(id: String!): Role! @requireAuth
   }
 `

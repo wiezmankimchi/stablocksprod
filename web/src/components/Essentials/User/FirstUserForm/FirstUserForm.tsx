@@ -9,7 +9,6 @@ import {
 
 const UserForm = (props) => {
   const onSubmit = (data) => {
-    data.userTypes = ['admin']
     props.onSave(data, props?.user?.id)
   }
 

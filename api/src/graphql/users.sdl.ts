@@ -44,6 +44,12 @@ export const schema = gql`
     employees: [User!]! @requireAuth
   }
 
+  input CreateFirstUserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+  }
+
   input CreateUserInput {
     firstName: String!
     middleName: String
@@ -56,6 +62,7 @@ export const schema = gql`
     amount: Int
     payType: EmployeePayType
     resume: String
+    addRoles: [String]
   }
 
   input UpdateUserInput {
@@ -73,6 +80,7 @@ export const schema = gql`
   }
 
   type Mutation {
+    createFirstUser(input: CreateFirstUserInput!): User! @skipAuth
     createUser(input: CreateUserInput!): User! @skipAuth
     updateUser(id: String!, input: UpdateUserInput!): User! @requireAuth
     deleteUser(id: String!): User! @requireAuth

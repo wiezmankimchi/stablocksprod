@@ -14,7 +14,6 @@ export const QUERY = gql`
       email
       otherEmails
       profileImage
-      userTypes
       position
       supervisorId
       amount

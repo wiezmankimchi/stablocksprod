@@ -6,7 +6,7 @@ import EmployeesCell from 'src/components/Essentials/User/EmployeesCell'
 import { CogIcon } from '@heroicons/react/outline'
 
 const OrganizationPage = () => {
-  const { organization } = useContext(AppContext)
+  const { organization, userCount } = useContext(AppContext)
 
   return (
     <>
@@ -19,10 +19,12 @@ const OrganizationPage = () => {
             label: 'Settings',
             icon: CogIcon,
             onClick: () => navigate(routes.organizationSettings()),
+            roles: ['admin'],
           },
         ]}
       />
-      <EmployeesCell />
+      <p>{JSON.stringify(organization)}</p>
+      <p>Users: {userCount}</p>
     </>
   )
 }

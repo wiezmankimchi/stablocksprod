@@ -34,11 +34,11 @@ export const updateRole = ({ id, input }: UpdateRoleArgs) => {
   })
 }
 
-export const deleteRole = ({ id }: Prisma.RoleWhereUniqueInput) => {
-  return db.role.delete({
-    where: { id },
-  })
-}
+// export const deleteRole = ({ id }: Prisma.RoleWhereUniqueInput) => {
+//   return db.role.delete({
+//     where: { id },
+//   })
+// }
 
 export const Role = {
   user: (_obj, { root }: ResolverArgs<ReturnType<typeof role>>) =>
