@@ -32,7 +32,6 @@ model User {
   email           String           @unique
   otherEmails     String[]
   profileImage    String?
-  userTypes       UserType[]
   roles           Role?
   // Organization
   position        String?
@@ -250,13 +249,6 @@ model Role {
 }
 
 // Enums
-
-enum UserType {
-  admin
-  employee
-  contact
-  applicant
-}
 
 enum EmployeePayType {
   salary

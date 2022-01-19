@@ -7,7 +7,6 @@ export const schema = gql`
     email: String!
     otherEmails: [String]
     profileImage: String
-    userTypes: [UserType]!
     roles: Role
     position: String
     departments: [Department]!
@@ -33,12 +32,6 @@ export const schema = gql`
     createdAt: DateTime!
   }
 
-  enum UserType {
-    admin
-    employee
-    contact
-    applicant
-  }
   enum EmployeePayType {
     salary
     hourly
@@ -58,7 +51,6 @@ export const schema = gql`
     email: String!
     otherEmails: [String]
     profileImage: String
-    userTypes: [UserType]!
     position: String
     supervisorId: String
     amount: Int
@@ -73,7 +65,6 @@ export const schema = gql`
     email: String
     otherEmails: [String]
     profileImage: String
-    userTypes: [UserType]
     position: String
     supervisorId: String
     amount: Int
