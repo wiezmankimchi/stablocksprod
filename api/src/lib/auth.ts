@@ -30,14 +30,14 @@ type RedwoodUser = Record<string, unknown> & { roles?: string[] }
  */
 export const getCurrentUser = async (
   decoded,
-  { token, type },
-  { event, context }
+  { _token, _type },
+  { _event, _context }
 ): Promise<RedwoodUser> => {
   if (!decoded) {
     return null
   }
 
-  let user
+  let user = {}
 
   const fetchedUser = await db.user.findUnique({
     where: { email: decoded.email },
@@ -45,17 +45,6 @@ export const getCurrentUser = async (
 
   if (fetchedUser) {
     user = fetchedUser
-  } else {
-    const createdUser = await db.user.create({
-      data: {
-        firstName: decoded.firstName,
-        lastName: decoded.lastName,
-        email: decoded.email,
-        userTypes: ['applicant'],
-      },
-    })
-
-    user = createdUser
   }
 
   const { roles } = parseJWT({ decoded })

@@ -70,9 +70,9 @@ export const schema = gql`
     middleName: String
     lastName: String
     email: String
-    otherEmails: [String]!
+    otherEmails: [String]
     profileImage: String
-    userTypes: [UserType]!
+    userTypes: [UserType]
     position: String
     supervisorId: String
     amount: Int

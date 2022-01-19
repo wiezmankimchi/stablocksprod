@@ -16,9 +16,21 @@ export const user = ({ id }: Prisma.UserWhereUniqueInput) => {
 export const employees = () => {
   return db.user.findMany({
     where: {
-      userTypes: {
-        has: 'employee',
-      },
+      OR: [
+        {
+          userTypes: {
+            has: 'employee',
+          },
+        },
+        {
+          userTypes: {
+            has: 'admin',
+          },
+        },
+      ],
+    },
+    orderBy: {
+      lastName: 'asc',
     },
   })
 }
