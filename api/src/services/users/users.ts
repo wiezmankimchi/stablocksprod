@@ -63,6 +63,8 @@ export const deleteUser = ({ id }: Prisma.UserWhereUniqueInput) => {
 }
 
 export const User = {
+  roles: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).roles(),
   departments: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).departments(),
   supervisor: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>

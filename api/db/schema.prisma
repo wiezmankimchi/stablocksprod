@@ -33,6 +33,7 @@ model User {
   otherEmails     String[]
   profileImage    String?
   userTypes       UserType[]
+  roles           Role?
   // Organization
   position        String?
   departments     Department[]
@@ -220,6 +221,32 @@ model TaskComment {
   // Times
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+}
+
+model Role {
+  userId          String   @id @unique
+  user            User     @relation(fields: [userId], references: [id])
+  admin           Boolean  @default(false)
+  employee        Boolean  @default(false)
+  external        Boolean  @default(true)
+  departmentAdmin Boolean  @default(false)
+  hrAdmin         Boolean  @default(false)
+  hr              Boolean  @default(false)
+  recruitingAdmin Boolean  @default(false)
+  recruiting      Boolean  @default(false)
+  crmAdmin        Boolean  @default(false)
+  crm             Boolean  @default(false)
+  marketingAdmin  Boolean  @default(false)
+  marketing       Boolean  @default(false)
+  salesAdmin      Boolean  @default(false)
+  sales           Boolean  @default(false)
+  helpdeskAdmin   Boolean  @default(false)
+  helpdesk        Boolean  @default(false)
+  projectsAdmin   Boolean  @default(false)
+  projects        Boolean  @default(false)
+  // Times
+  updatedAt       DateTime @updatedAt
+  createdAt       DateTime @default(now())
 }
 
 // Enums
