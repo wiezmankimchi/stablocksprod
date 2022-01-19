@@ -1,21 +1,15 @@
 import { useContext, useEffect } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
-import { HomeIcon } from '@heroicons/react/outline'
 import { MetaTags } from '@redwoodjs/web'
-import { Link, back, useLocation } from '@redwoodjs/router'
 import {
   AppContext,
   SearchItem,
 } from 'src/components/Providers/AppProviderCell'
+import Breadcrumbs, { Breadcrumb } from 'src/components/Layout/Breadcrumbs'
 
-interface Breadcrumb {
-  title: string
-  to: string
-}
-
-interface ActionButton {
+export interface ActionButton {
   label: React.ReactNode
   main?: boolean
+  icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
   onClick: () => void
 }
 
@@ -34,7 +28,6 @@ const PageTitle = ({
   buttons,
   search,
 }: PageTitleProps) => {
-  const { pathname } = useLocation()
   const { setSearch } = useContext(AppContext)
 
   useEffect(() => {
@@ -44,69 +37,13 @@ const PageTitle = ({
   return (
     <>
       <MetaTags title={title} />
-      <div className="page-title mb-12">
-        <div>
-          <nav className="sm:hidden" aria-label="Back">
-            <button
-              onClick={back}
-              className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
-            >
-              <ChevronLeftIcon
-                className="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              Back
-            </button>
-          </nav>
-          {pathname !== '/' && (
-            <nav className="hidden sm:flex" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-4">
-                <li>
-                  <div>
-                    <Link to="/" className="text-gray-400 hover:text-gray-500">
-                      <HomeIcon
-                        className="flex-shrink-0 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                      <span className="sr-only">Home</span>
-                    </Link>
-                  </div>
-                </li>
-                {breadcrumbs?.map((breadcrumb, i) => (
-                  <li key={i}>
-                    <div className="flex items-center">
-                      <ChevronRightIcon
-                        className="mr-4 flex-shrink-0 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      <Link
-                        to={breadcrumb.to}
-                        className="text-sm font-medium rounded-sm text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      >
-                        {breadcrumb.title}
-                      </Link>
-                    </div>
-                  </li>
-                ))}
 
-                <li>
-                  <div className="flex items-center">
-                    <ChevronRightIcon
-                      className="mr-4 flex-shrink-0 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    <span
-                      aria-current="page"
-                      className="text-sm font-medium text-gray-500"
-                    >
-                      {currentCrumbLabel || title}
-                    </span>
-                  </div>
-                </li>
-              </ol>
-            </nav>
-          )}
-        </div>
+      <div className="page-title mb-12">
+        <Breadcrumbs
+          breadcrumbs={breadcrumbs}
+          currentCrumbLabel={currentCrumbLabel || title}
+        />
+
         <div className="mt-2 md:flex md:items-center md:justify-between">
           <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -122,9 +59,10 @@ const PageTitle = ({
                   type="button"
                   className={`${i !== 0 ? 'ml-3 ' : ''}${
                     button.main ? 'btn-primary ' : ''
-                  }btn`}
+                  }btn flex items-center space-x-1`}
                 >
-                  {button.label}
+                  {button.icon && <button.icon className="h-4 w-4" />}
+                  <span>{button.label}</span>
                 </button>
               ))}
             </div>

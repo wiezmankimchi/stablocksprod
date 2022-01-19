@@ -1,13 +1,12 @@
 import type { FindUsers } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import PeopleTable from 'src/components/Layout/PeopleTable'
 
 import { Link, routes } from '@redwoodjs/router'
 
-import Users from 'src/components/Essentials/User/Users'
-
 export const QUERY = gql`
   query FindUsers {
-    users {
+    employees {
       id
       firstName
       middleName
@@ -19,31 +18,24 @@ export const QUERY = gql`
       position
       supervisorId
       amount
-      payType
       resume
+      departments {
+        name
+      }
       updatedAt
       createdAt
     }
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <></>
 
-export const Empty = () => {
-  return (
-    <div className="rw-text-center">
-      {'No users yet. '}
-      <Link to={routes.newUser()} className="rw-link">
-        {'Create one?'}
-      </Link>
-    </div>
-  )
-}
+export const Empty = () => <></>
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>
 )
 
-export const Success = ({ users }: CellSuccessProps<FindUsers>) => {
-  return <Users users={users} />
+export const Success = ({ employees }: CellSuccessProps<FindUsers>) => {
+  return <PeopleTable people={employees} />
 }

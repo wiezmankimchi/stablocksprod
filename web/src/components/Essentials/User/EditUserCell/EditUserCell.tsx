@@ -42,7 +42,7 @@ const UPDATE_USER_MUTATION = gql`
       position
       supervisorId
       amount
-      type
+      payType
       resume
       updatedAt
       createdAt

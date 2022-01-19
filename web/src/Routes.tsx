@@ -17,15 +17,17 @@ const Routes = () => {
       <Set wrap={[AppProviderCell]}>
         <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
         <Route path="/login" page={LoginPage} name="login" />
-        <Set private unauthenticated="login" wrap={[DashboardLayout]}>
-          <Route path="/profile" page={ProfilePage} name="profile" />
-          <Route path="/users/new" page={EssentialsUserNewUserPage} name="newUser" />
-          <Route path="/users/{id}/edit" page={EssentialsUserEditUserPage} name="editUser" />
-          <Route path="/users/{id}" page={EssentialsUserUserPage} name="user" />
-          <Route path="/users" page={EssentialsUserUsersPage} name="users" />
-          <Route path="/organization/settings" page={EssentialsOrganizationOrganizationSettingsPage} name="organizationSettings" />
-          <Route path="/organization" page={EssentialsOrganizationOrganizationPage} name="organization" />
-          <Route path="/" page={HomePage} name="home" />
+        <Set private unauthenticated="login">
+          <Route path="/user-onboarding" page={UserOnboardingPage} name="userOnboarding" />
+          <Set wrap={[DashboardLayout]}>
+            <Route path="/profile" page={ProfilePage} name="profile" />
+            <Route path="/organization/employees/new" page={EssentialsUserNewUserPage} name="newEmployees" />
+            <Route path="/organization/employees/{id}/edit" page={EssentialsUserEditUserPage} name="editEmployees" />
+            <Route path="/organization/employees/{id}" page={EssentialsUserUserPage} name="employee" />
+            <Route path="/organization/settings" page={EssentialsOrganizationOrganizationSettingsPage} name="organizationSettings" />
+            <Route path="/organization" page={EssentialsOrganizationOrganizationPage} name="organization" />
+            <Route path="/" page={HomePage} name="home" />
+          </Set>
         </Set>
       </Set>
       <Route notfound page={NotFoundPage} />

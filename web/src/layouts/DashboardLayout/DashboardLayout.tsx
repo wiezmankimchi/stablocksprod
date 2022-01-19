@@ -1,8 +1,9 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
+  ChevronRightIcon,
   HomeIcon,
   MenuAlt2Icon,
   OfficeBuildingIcon,
@@ -10,8 +11,9 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import { Link, NavLink, Redirect, routes, useLocation } from '@redwoodjs/router'
+import { Link, Redirect, routes, useLocation } from '@redwoodjs/router'
 import { AppContext } from 'src/components/Providers/AppProviderCell'
+import NavLink from 'src/components/Elements/NavLink'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -33,6 +35,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       name: 'Organization',
       href: routes.organization(),
       icon: OfficeBuildingIcon,
+      children: [{ name: 'Overview', href: routes.organization() }],
     },
   ]
   const userNavigation = [
@@ -48,9 +51,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return <Redirect to={routes.login()} />
   }
 
+  if (!currentUser?.firstName || !currentUser?.lastName) {
+    return <Redirect to={routes.userOnboarding()} />
+  }
+
   return (
     <>
-      <div>
+      <div className="flex-1 h-full">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -90,7 +97,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                   <div className="absolute top-0 right-0 -mr-12 pt-2">
                     <button
                       type="button"
-                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring focus:ring-inset focus:ring-white"
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
@@ -113,25 +120,72 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 </Link>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <NavLink
-                        key={item.name}
-                        to={item.href}
-                        className="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                        activeClassName="bg-gray-900 text-white"
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current
-                              ? 'text-gray-300'
-                              : 'text-gray-400 group-hover:text-gray-300',
-                            'mr-4 flex-shrink-0 h-6 w-6'
+                    {navigation.map((item) =>
+                      !item.children ? (
+                        <div key={item.name}>
+                          <NavLink
+                            to={item.href}
+                            className="group w-full flex items-center pl-2 pr-1 py-2 text-left text-base font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
+                            activeClassName="bg-gray-900 text-gray-300"
+                          >
+                            <item.icon
+                              className="mr-3 flex-shrink-0 h-6 w-6"
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </NavLink>
+                        </div>
+                      ) : (
+                        <Disclosure
+                          as="div"
+                          key={item.name}
+                          className="space-y-1"
+                          defaultOpen={
+                            item.href.startsWith(pathname) ? true : false
+                          }
+                        >
+                          {({ open }) => (
+                            <>
+                              <Disclosure.Button
+                                className={`${
+                                  pathname === item.href
+                                    ? 'bg-gray-900 text-gray-300'
+                                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                                } group w-full flex items-center pl-2 pr-1 py-2 text-left text-base font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500`}
+                              >
+                                <item.icon
+                                  className="mr-3 flex-shrink-0 h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                                <span className="flex-1">{item.name}</span>
+                                <ChevronRightIcon
+                                  className={`${
+                                    open
+                                      ? 'text-gray-400 rotate-90'
+                                      : 'text-gray-300'
+                                  } ml-3 flex-shrink-0 h-4 w-4 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150`}
+                                />
+                              </Disclosure.Button>
+                              <Disclosure.Panel className="space-y-1">
+                                {item.children.map((subItem) => (
+                                  <Disclosure.Button
+                                    key={subItem.name}
+                                    as={NavLink}
+                                    to={subItem.href}
+                                    className="group w-full flex items-center pl-11 pr-2 py-2 text-base font-medium rounded-md text-left focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                                    activeClassName="bg-gray-900 text-gray-300"
+                                    nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
+                                  >
+                                    {subItem.name}
+                                  </Disclosure.Button>
+                                ))}
+                              </Disclosure.Panel>
+                            </>
                           )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </NavLink>
-                    ))}
+                        </Disclosure>
+                      )
+                    )}
                   </nav>
                 </div>
               </div>
@@ -158,30 +212,78 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </Link>
             <div className="flex-1 flex flex-col overflow-y-auto">
               <nav className="flex-1 px-2 py-4 space-y-1">
-                {navigation.map((item) => (
-                  <NavLink
-                    key={item.name}
-                    to={item.href}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    activeClassName="bg-gray-900 text-white"
-                  >
-                    <item.icon
-                      className={classNames(
-                        item.current
-                          ? 'text-gray-300'
-                          : 'text-gray-400 group-hover:text-gray-300',
-                        'mr-3 flex-shrink-0 h-6 w-6'
+                {navigation.map((item) =>
+                  !item.children ? (
+                    <div key={item.name}>
+                      <NavLink
+                        to={item.href}
+                        className="group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
+                        activeClassName="bg-gray-900 text-gray-300"
+                      >
+                        <item.icon
+                          className="mr-3 flex-shrink-0 h-6 w-6"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </NavLink>
+                    </div>
+                  ) : (
+                    <Disclosure
+                      as="div"
+                      key={item.name}
+                      className="space-y-1"
+                      defaultOpen={
+                        item.href.startsWith(pathname) ? true : false
+                      }
+                    >
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button
+                            className={`${
+                              pathname === item.href
+                                ? 'bg-gray-900 text-gray-300'
+                                : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                            } group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500`}
+                          >
+                            <item.icon
+                              className="mr-3 flex-shrink-0 h-6 w-6"
+                              aria-hidden="true"
+                            />
+                            <span className="flex-1">{item.name}</span>
+                            <ChevronRightIcon
+                              className={`${
+                                open
+                                  ? 'text-gray-400 rotate-90'
+                                  : 'text-gray-300'
+                              } ml-3 flex-shrink-0 h-4 w-4 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150`}
+                            />
+                          </Disclosure.Button>
+                          <Disclosure.Panel className="space-y-1">
+                            {item.children.map((subItem) => (
+                              <Disclosure.Button
+                                key={subItem.name}
+                                as={NavLink}
+                                to={subItem.href}
+                                className="group w-full flex items-center pl-11 pr-2 py-2 text-sm font-medium rounded-md text-left focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                                activeClassName="bg-gray-900 text-gray-300"
+                                nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
+                              >
+                                {subItem.name}
+                              </Disclosure.Button>
+                            ))}
+                          </Disclosure.Panel>
+                        </>
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </NavLink>
-                ))}
+                    </Disclosure>
+                  )
+                )}
               </nav>
             </div>
           </div>
         </div>
-        <div className="md:pl-64 flex flex-col">
+
+        <div className="md:pl-64 h-full flex flex-col">
           <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
             <button
               type="button"
@@ -292,8 +394,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
           </div>
 
-          <main className="flex-1">
-            <div className="p-6 md:px-12">{children}</div>
+          <main className="h-full">
+            <div className="p-6 md:px-12 h-full">{children}</div>
           </main>
         </div>
       </div>

@@ -28,7 +28,7 @@ const DescriptionList = ({
 
   return (
     <Form onSubmit={onSubmit} error={error} className="max-w-3xl">
-      <div className="sm:flex flex-wrap items-center justify-between">
+      <div className="sm:flex items-center justify-between">
         <div>
           <h3 className="text-lg leading-6 font-medium text-gray-900">
             {title}

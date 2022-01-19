@@ -5,6 +5,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { QUERY as PROVIDER_QUERY } from 'src/components/Providers/AppProviderCell'
 
 import OrganizationForm from 'src/components/Essentials/Organization/OrganizationForm'
+import Loader from 'src/components/Elements/Loader'
 
 export const QUERY = gql`
   query EditOrganization {
@@ -39,7 +40,7 @@ const UPDATE_ORGANIZATION_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Loader />
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>

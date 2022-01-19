@@ -1,22 +1,4 @@
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-import { Link, routes, navigate } from '@redwoodjs/router'
-
-const DELETE_ORGANIZATION_MUTATION = gql`
-  mutation DeleteOrganizationMutation($id: String!) {
-    deleteOrganization(id: $id) {
-      id
-    }
-  }
-`
-
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
+import { Link, routes } from '@redwoodjs/router'
 
 const timeTag = (datetime) => {
   return (
@@ -31,22 +13,6 @@ const checkboxInputTag = (checked) => {
 }
 
 const Organization = ({ organization }) => {
-  const [deleteOrganization] = useMutation(DELETE_ORGANIZATION_MUTATION, {
-    onCompleted: () => {
-      toast.success('Organization deleted')
-      navigate(routes.organizations())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
-
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete organization ' + id + '?')) {
-      deleteOrganization({ variables: { id } })
-    }
-  }
-
   return (
     <>
       <div className="rw-segment">
@@ -107,13 +73,6 @@ const Organization = ({ organization }) => {
         >
           Edit
         </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(organization.id)}
-        >
-          Delete
-        </button>
       </nav>
     </>
   )

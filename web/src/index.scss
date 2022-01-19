@@ -7,7 +7,7 @@ body,
 }
 
 button {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-100;
 }
 
 main {
@@ -54,6 +54,10 @@ main {
 
 [role='tablist'] button {
   @apply focus:ring-0 focus:ring-offset-0;
+}
+
+.rw-field-error {
+  @apply text-red-600 text-xs;
 }
 
 @import "tailwindcss/components";
