@@ -8,7 +8,7 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "0.41.0"
+    "@redwoodjs/core": "^0.42.0"
   },
   "scripts": {
     "postgres:up": "docker-compose up -d",
