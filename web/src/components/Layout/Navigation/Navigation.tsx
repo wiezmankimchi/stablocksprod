@@ -3,9 +3,17 @@ import { routes, useLocation } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
 import NavLink from 'src/components/Elements/NavLink'
 import {
+  BriefcaseIcon,
+  CashIcon,
+  ChartSquareBarIcon,
   ChevronRightIcon,
   HomeIcon,
+  IdentificationIcon,
   OfficeBuildingIcon,
+  TemplateIcon,
+  SpeakerphoneIcon,
+  SupportIcon,
+  UserGroupIcon,
 } from '@heroicons/react/outline'
 
 interface SubMenuButtonProps {
@@ -68,6 +76,123 @@ const Navigation = () => {
           name: 'Settings',
           to: routes.organizationSettings(),
           authorized: useAuthorization(['admin']),
+        },
+      ],
+    },
+    {
+      name: 'Contacts',
+      to: '#',
+      icon: IdentificationIcon,
+      authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
+      children: [
+        {
+          name: 'Companies',
+          to: '#',
+          authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
+        },
+      ],
+    },
+    {
+      name: 'Marketing',
+      to: '#',
+      icon: SpeakerphoneIcon,
+      authorized: useAuthorization(['admin', 'marketingAdmin', 'marketing']),
+    },
+    {
+      name: 'Sales',
+      to: '#',
+      icon: ChartSquareBarIcon,
+      authorized: useAuthorization(['admin', 'salesAdmin', 'sales']),
+    },
+    {
+      name: 'Finance',
+      to: '#',
+      icon: CashIcon,
+      authorized: useAuthorization(['admin']),
+      children: [
+        {
+          name: 'Accounting',
+          to: '#',
+          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+        },
+        {
+          name: 'Income',
+          to: '#',
+          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+        },
+        {
+          name: 'Expenses',
+          to: '#',
+          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+        },
+      ],
+    },
+    {
+      name: 'HR',
+      to: '#',
+      icon: UserGroupIcon,
+      authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+      children: [
+        {
+          name: 'Onboarding',
+          to: '#',
+          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+        },
+      ],
+    },
+    {
+      name: 'Recruiting',
+      to: '#',
+      icon: BriefcaseIcon,
+      authorized: useAuthorization([
+        'admin',
+        'recruitingAdmin',
+        'recruiting',
+        'external',
+      ]),
+      children: [
+        {
+          name: 'Jobs',
+          to: '#',
+          authorized: useAuthorization([
+            'admin',
+            'recruitingAdmin',
+            'recruiting',
+            'external',
+          ]),
+        },
+        {
+          name: 'Applications',
+          to: '#',
+          authorized: useAuthorization([
+            'admin',
+            'recruitingAdmin',
+            'recruiting',
+            'external',
+          ]),
+        },
+      ],
+    },
+    {
+      name: 'Helpdesk',
+      to: '#',
+      icon: SupportIcon,
+      authorized: useAuthorization([]),
+      children: [
+        { name: 'Tickets', to: '#', authorized: useAuthorization([]) },
+        { name: 'Chat', to: '#', authorized: useAuthorization([]) },
+      ],
+    },
+    {
+      name: 'Projects',
+      to: '#',
+      icon: TemplateIcon,
+      authorized: useAuthorization(['admin', 'employee']),
+      children: [
+        {
+          name: 'Tasks',
+          to: '#',
+          authorized: useAuthorization(['admin', 'employee']),
         },
       ],
     },

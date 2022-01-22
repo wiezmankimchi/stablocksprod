@@ -31,13 +31,13 @@ const MenuButtonGroup = ({ buttons }: MenuButtonGroupProps) => {
               <button
                 onClick={button.onClick}
                 type="button"
-                className={`${i !== 0 ? 'ml-3 ' : ''}${
+                className={`${
                   button.main
                     ? 'btn-primary'
                     : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:border-indigo-500'
                 } ${
                   button.children ? 'rounded-l-md' : 'rounded-md'
-                } relative inline-flex items-center px-4 py-2 border text-sm font-medium space-x-1 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+                } relative inline-flex items-center justify-center px-4 py-2 border text-sm font-medium space-x-1 w-full focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
               >
                 {button.icon && <button.icon className="h-4 w-4" />}
                 <span>{button.label}</span>

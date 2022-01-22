@@ -28,6 +28,7 @@ const PageTitle = ({
 
   useEffect(() => {
     setSearch(search)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -47,7 +48,7 @@ const PageTitle = ({
             </h1>
           </div>
           {buttons && buttons.length && (
-            <div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+            <div className="mt-4 flex-shrink-0 flex space-x-2 md:mt-0 md:ml-4">
               <MenuButtonGroup buttons={buttons} />
             </div>
           )}

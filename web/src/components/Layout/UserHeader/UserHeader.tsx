@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { Link } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import {
   AppContext,
@@ -34,11 +35,12 @@ const UserHeader = ({
 
   useEffect(() => {
     setSearch(search)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      <MetaTags />
+      <MetaTags title={`${name}`} />
       <Breadcrumbs
         breadcrumbs={breadcrumbs}
         currentCrumbLabel={currentCrumbLabel || 'User'}
@@ -71,9 +73,9 @@ const UserHeader = ({
                 {applicant ? (
                   <>
                     Applied for{' '}
-                    <a href="#" className="text-gray-900">
+                    <Link to="#" className="text-gray-900">
                       {position}
-                    </a>{' '}
+                    </Link>{' '}
                     on <time dateTime="2020-08-25">August 25, 2020</time>
                   </>
                 ) : (
@@ -84,7 +86,7 @@ const UserHeader = ({
           </div>
         </div>
         {buttons && buttons.length && (
-          <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+          <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-2 md:mt-0 md:flex-row md:space-x-2">
             <MenuButtonGroup buttons={buttons} />
           </div>
         )}
