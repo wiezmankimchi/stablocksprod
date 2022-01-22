@@ -1,14 +1,9 @@
 version: '3.7'
 services:
-  db:
+  db-test:
     image: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5433:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+      - 5434:5432
