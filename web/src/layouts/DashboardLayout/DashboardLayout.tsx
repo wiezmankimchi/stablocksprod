@@ -1,31 +1,18 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
   MenuAlt2Icon,
-  UsersIcon,
+  UserCircleIcon,
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-]
+import { Link, Redirect, routes, useLocation } from '@redwoodjs/router'
+import { AppContext } from 'src/components/Providers/AppProviderCell'
+import Navigation from 'src/components/Layout/Navigation'
+import Popup from 'src/components/Elements/Popup'
+import Logo from 'src/lib/logo.svg'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -36,17 +23,47 @@ type DashboardLayoutProps = {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  const { pathname } = useLocation()
+  const { currentUser, logOut, hasRole } = useAuth()
+  const { search } = useContext(AppContext)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const { logOut } = useAuth()
+  const [logoutOpen, setLogoutOpen] = useState(false)
+
+  const userNavigation = [
+    {
+      name: 'Your Profile',
+      href: hasRole(['admin', 'employee'])
+        ? routes.employee({
+            id:
+              typeof currentUser.id !== 'string'
+                ? currentUser.id.toString()
+                : currentUser.id,
+          })
+        : routes.profile(),
+    },
+    { name: 'Settings', href: '#' },
+  ]
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname])
+
+  if (!currentUser) {
+    return <Redirect to={routes.login()} />
+  }
+
+  if (!currentUser?.firstName || !currentUser?.lastName) {
+    return <Redirect to={routes.userOnboarding()} />
+  }
 
   return (
     <>
-      <div>
+      <div className="flex-1 min-h-full">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
-            className="fixed inset-0 flex z-40 md:hidden"
+            className="fixed inset-0 flex z-50 md:hidden"
             onClose={setSidebarOpen}
           >
             <Transition.Child
@@ -69,7 +86,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
+              <div className="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-gray-800">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -82,7 +99,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                   <div className="absolute top-0 right-0 -mr-12 pt-2">
                     <button
                       type="button"
-                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring focus:ring-inset focus:ring-white"
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
@@ -93,38 +110,18 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex-shrink-0 flex items-center px-4">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Workflow"
-                  />
-                </div>
+                <Link
+                  to={routes.home()}
+                  className="flex items-center flex-shrink-0 px-4 py-4 bg-gray-900 hover:bg-indigo-900"
+                >
+                  <Logo className="h-8 w-auto fill-current text-indigo-500" />
+                  <h2 className="text-white font-bold text-xl ml-3">
+                    Stablocks
+                  </h2>
+                </Link>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current
-                              ? 'text-gray-300'
-                              : 'text-gray-400 group-hover:text-gray-300',
-                            'mr-4 flex-shrink-0 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))}
+                    <Navigation />
                   </nav>
                 </div>
               </div>
@@ -139,43 +136,22 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
-            <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                alt="Workflow"
-              />
-            </div>
+            <Link
+              to={routes.home()}
+              className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900 hover:bg-indigo-900"
+            >
+              <Logo className="h-8 w-auto fill-current text-indigo-500" />
+              <h2 className="text-white font-bold text-xl ml-3">Stablocks</h2>
+            </Link>
             <div className="flex-1 flex flex-col overflow-y-auto">
               <nav className="flex-1 px-2 py-4 space-y-1">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                    )}
-                  >
-                    <item.icon
-                      className={classNames(
-                        item.current
-                          ? 'text-gray-300'
-                          : 'text-gray-400 group-hover:text-gray-300',
-                        'mr-3 flex-shrink-0 h-6 w-6'
-                      )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </a>
-                ))}
+                <Navigation />
               </nav>
             </div>
           </div>
         </div>
-        <div className="md:pl-64 flex flex-col">
+
+        <div className="md:pl-64 min-h-full flex flex-col">
           <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
             <button
               type="button"
@@ -187,23 +163,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </button>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                <form className="w-full flex md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                {search && (
+                  <form className="w-full flex md:ml-0" action="#" method="GET">
+                    <label htmlFor="search-field" className="sr-only">
+                      Search {search.label}
+                    </label>
+                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+                      <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                        <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <input
+                        id="search-field"
+                        className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+                        placeholder={`Search ${search.label}`}
+                        type="search"
+                        name="search"
+                      />
                     </div>
-                    <input
-                      id="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />
-                  </div>
-                </form>
+                  </form>
+                )}
               </div>
               <div className="ml-4 flex items-center md:ml-6">
                 <button
@@ -217,13 +195,26 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Menu.Button
+                      className={`${
+                        currentUser.profileImage
+                          ? 'max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                          : 'bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                      }`}
+                    >
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      {currentUser.profileImage ? (
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      ) : (
+                        <UserCircleIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -236,18 +227,18 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
+                      {userNavigation?.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.href}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}
@@ -258,7 +249,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                               active ? 'bg-gray-100' : '',
                               'block w-full text-left px-4 py-2 text-sm text-gray-700'
                             )}
-                            onClick={logOut}
+                            onClick={() => setLogoutOpen(true)}
                           >
                             Sign out
                           </button>
@@ -267,12 +258,23 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+
+                <Popup
+                  isOpen={logoutOpen}
+                  setIsOpen={setLogoutOpen}
+                  title="Sign out"
+                  description="Are you sure you want to sign out? You will need to log back in to access Stablocks."
+                  buttons={[
+                    { label: 'Cancel', onClick: () => setLogoutOpen(false) },
+                    { label: 'Sign out', onClick: () => logOut(), main: true },
+                  ]}
+                />
               </div>
             </div>
           </div>
 
-          <main className="flex-1">
-            <div className="py-6">{children}</div>
+          <main className="min-h-full">
+            <div className="p-6 pb-20 md:px-12 min-h-full">{children}</div>
           </main>
         </div>
       </div>

@@ -1,21 +1,29 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, Redirect, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useAuth } from '@redwoodjs/auth'
 import { ArrowNarrowRightIcon } from '@heroicons/react/outline'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
+import { AppContext } from 'src/components/Providers/AppProviderCell'
+import NewOrganization from 'src/components/Essentials/Organization/NewOrganization'
+import NewFirstUser from 'src/components/Essentials/User/NewFirstUser'
 
 const OnboardingPage = () => {
   const { currentUser } = useAuth()
+  const { organization, userCount } = useContext(AppContext)
 
-  const [isCompanyComplete, setIsCompanyComplete] = useState(false)
-  const [isPersonalComplete, setIsPersonalComplete] = useState(false)
+  if (organization && userCount && currentUser) {
+    return <Redirect to={routes.home()} />
+  }
+
+  if (organization && userCount) {
+    return <Redirect to={routes.login()} />
+  }
 
   return (
     <>
       <MetaTags title="Onboarding" />
-      {currentUser && <Redirect to={routes.home()} />}
-      <div className="flex items-center justify-center h-full px-4 md:px-12">
+      <div className="flex justify-center h-full py-12 md:py-16 px-4 md:px-12">
         <div className="max-w-5xl w-full mx-auto">
           <div className="pb-5 mb-5 border-b border-gray-200">
             <h3 className="text-3xl leading-6 font-bold text-gray-900">
@@ -30,7 +38,7 @@ const OnboardingPage = () => {
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Company
                   </h3>
-                  {!isCompanyComplete && (
+                  {!organization && (
                     <p className="mt-1 text-sm text-gray-600">
                       This information will be displayed publicly.
                     </p>
@@ -38,60 +46,10 @@ const OnboardingPage = () => {
                 </div>
               </div>
               <div className="mt-5 md:mt-0 md:col-span-2">
-                {!isCompanyComplete ? (
-                  <form action="#" method="POST">
-                    <div className="shadow rounded-md overflow-hidden">
-                      <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                        <div className="grid grid-cols-3 gap-6">
-                          <div className="col-span-3 sm:col-span-2">
-                            <label
-                              htmlFor="company-name"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Name
-                            </label>
-                            <input
-                              type="text"
-                              name="company-name"
-                              id="company-name"
-                              placeholder="Acme, Inc."
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          </div>
-
-                          <div className="col-span-3 sm:col-span-2">
-                            <label
-                              htmlFor="company-website"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Website
-                            </label>
-                            <div className="mt-1 flex rounded-md shadow-sm">
-                              <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                https://
-                              </span>
-                              <input
-                                type="text"
-                                name="company-website"
-                                id="company-website"
-                                className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                placeholder="www.example.com"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button
-                          type="button"
-                          onClick={() => setIsCompanyComplete(true)}
-                          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                {!organization ? (
+                  <div className="shadow rounded-md overflow-hidden">
+                    <NewOrganization />
+                  </div>
                 ) : (
                   <div className="flex px-4 sm:px-0 md:justify-end">
                     <BadgeCheckIcon className="h-8 w-8 text-green-600" />
@@ -114,7 +72,7 @@ const OnboardingPage = () => {
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Personal Information
                   </h3>
-                  {isCompanyComplete && !isPersonalComplete && (
+                  {organization && !userCount && (
                     <p className="mt-1 text-sm text-gray-600">
                       You will be setup as the initial admin of the
                       organization.
@@ -123,74 +81,13 @@ const OnboardingPage = () => {
                 </div>
               </div>
               <div className="mt-5 md:mt-0 md:col-span-2">
-                {isCompanyComplete && !isPersonalComplete ? (
-                  <form action="#" method="POST">
-                    <div className="shadow overflow-hidden rounded-md">
-                      <div className="px-4 py-5 bg-white sm:p-6">
-                        <div className="grid grid-cols-6 gap-6">
-                          <div className="col-span-6 sm:col-span-3">
-                            <label
-                              htmlFor="first-name"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              First name
-                            </label>
-                            <input
-                              type="text"
-                              name="first-name"
-                              id="first-name"
-                              autoComplete="given-name"
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          </div>
-
-                          <div className="col-span-6 sm:col-span-3">
-                            <label
-                              htmlFor="last-name"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Last name
-                            </label>
-                            <input
-                              type="text"
-                              name="last-name"
-                              id="last-name"
-                              autoComplete="family-name"
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          </div>
-
-                          <div className="col-span-6 sm:col-span-4">
-                            <label
-                              htmlFor="email-address"
-                              className="block text-sm font-medium text-gray-700"
-                            >
-                              Email address
-                            </label>
-                            <input
-                              type="text"
-                              name="email-address"
-                              id="email-address"
-                              autoComplete="email"
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button
-                          type="button"
-                          onClick={() => setIsPersonalComplete(true)}
-                          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                {organization && !userCount ? (
+                  <div className="shadow rounded-md overflow-hidden">
+                    <NewFirstUser />
+                  </div>
                 ) : (
                   <div className="flex px-4 sm:px-0 md:justify-end">
-                    {isPersonalComplete && (
+                    {userCount && (
                       <BadgeCheckIcon className="h-8 w-8 text-green-600" />
                     )}
                   </div>
@@ -205,7 +102,7 @@ const OnboardingPage = () => {
             </div>
           </div>
 
-          {isCompanyComplete && isPersonalComplete && (
+          {organization && userCount && (
             <div className="flex justify-end">
               <Link
                 to={routes.login()}

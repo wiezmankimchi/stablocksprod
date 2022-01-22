@@ -13,8 +13,10 @@
   "scripts": {
     "postgres:up": "docker-compose up -d",
     "postgres:down": "docker-compose down",
-    "dev": "yarn postgres:down && yarn postgres:up && yarn rw dev",
-    "test": "yarn postgres:down && yarn postgres:up && yarn rw test"
+    "postgres-test:up": "docker-compose -f docker-compose-test.yml up -d",
+    "postgres-test:down": "docker-compose -f docker-compose-test.yml down",
+    "dev": "yarn postgres:up && yarn rw dev",
+    "test": "yarn postgres-test:down && yarn postgres-test:up && yarn rw test"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
