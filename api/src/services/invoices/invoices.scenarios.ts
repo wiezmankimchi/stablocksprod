@@ -4,18 +4,18 @@ export const standard = defineScenario<Prisma.InvoiceCreateArgs>({
   invoice: {
     one: {
       data: {
-        dueDate: '2022-01-22T19:45:26Z',
-        updatedAt: '2022-01-22T19:45:26Z',
+        dueDate: '2022-01-22T19:51:31Z',
+        updatedAt: '2022-01-22T19:51:31Z',
         contact: {
           create: {
-            updatedAt: '2022-01-22T19:45:26Z',
+            updatedAt: '2022-01-22T19:51:31Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String261137',
+                email: 'String326391',
                 otherEmails: 'String',
-                updatedAt: '2022-01-22T19:45:26Z',
+                updatedAt: '2022-01-22T19:51:31Z',
               },
             },
           },
@@ -24,18 +24,18 @@ export const standard = defineScenario<Prisma.InvoiceCreateArgs>({
     },
     two: {
       data: {
-        dueDate: '2022-01-22T19:45:26Z',
-        updatedAt: '2022-01-22T19:45:26Z',
+        dueDate: '2022-01-22T19:51:31Z',
+        updatedAt: '2022-01-22T19:51:31Z',
         contact: {
           create: {
-            updatedAt: '2022-01-22T19:45:26Z',
+            updatedAt: '2022-01-22T19:51:31Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String9781987',
+                email: 'String8830714',
                 otherEmails: 'String',
-                updatedAt: '2022-01-22T19:45:26Z',
+                updatedAt: '2022-01-22T19:51:31Z',
               },
             },
           },

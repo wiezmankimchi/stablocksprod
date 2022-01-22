@@ -10,6 +10,7 @@ export const schema = gql`
 
   type Query {
     expenseCategories: [ExpenseCategory!]! @requireAuth
+    expenseCategory(id: String!): ExpenseCategory @requireAuth
   }
 
   input CreateExpenseCategoryInput {
@@ -20,5 +21,15 @@ export const schema = gql`
   input UpdateExpenseCategoryInput {
     name: String
     default: Boolean
+  }
+
+  type Mutation {
+    createExpenseCategory(input: CreateExpenseCategoryInput!): ExpenseCategory!
+      @requireAuth
+    updateExpenseCategory(
+      id: String!
+      input: UpdateExpenseCategoryInput!
+    ): ExpenseCategory! @requireAuth
+    deleteExpenseCategory(id: String!): ExpenseCategory! @requireAuth
   }
 `

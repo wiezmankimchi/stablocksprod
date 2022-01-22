@@ -13,6 +13,7 @@ export const schema = gql`
 
   type Query {
     invoiceItems: [InvoiceItem!]! @requireAuth
+    invoiceItem(id: String!): InvoiceItem @requireAuth
   }
 
   input CreateInvoiceItemInput {
@@ -29,5 +30,14 @@ export const schema = gql`
     rate: Int
     description: String
     invoiceId: String
+  }
+
+  type Mutation {
+    createInvoiceItem(input: CreateInvoiceItemInput!): InvoiceItem! @requireAuth
+    updateInvoiceItem(
+      id: String!
+      input: UpdateInvoiceItemInput!
+    ): InvoiceItem! @requireAuth
+    deleteInvoiceItem(id: String!): InvoiceItem! @requireAuth
   }
 `

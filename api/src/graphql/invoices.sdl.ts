@@ -17,6 +17,7 @@ export const schema = gql`
 
   type Query {
     invoices: [Invoice!]! @requireAuth
+    invoice(id: String!): Invoice @requireAuth
   }
 
   input CreateInvoiceInput {
@@ -37,5 +38,12 @@ export const schema = gql`
     sent: Boolean
     paid: Boolean
     description: String
+  }
+
+  type Mutation {
+    createInvoice(input: CreateInvoiceInput!): Invoice! @requireAuth
+    updateInvoice(id: String!, input: UpdateInvoiceInput!): Invoice!
+      @requireAuth
+    deleteInvoice(id: String!): Invoice! @requireAuth
   }
 `

@@ -5,17 +5,17 @@ export const standard = defineScenario<Prisma.ExpenseCreateArgs>({
     one: {
       data: {
         name: 'String',
-        amount: 9802390,
-        date: '2022-01-22T19:45:44Z',
-        updatedAt: '2022-01-22T19:45:44Z',
+        amount: 6059740,
+        date: '2022-01-22T19:51:53Z',
+        updatedAt: '2022-01-22T19:51:53Z',
       },
     },
     two: {
       data: {
         name: 'String',
-        amount: 5821598,
-        date: '2022-01-22T19:45:44Z',
-        updatedAt: '2022-01-22T19:45:44Z',
+        amount: 9243670,
+        date: '2022-01-22T19:51:53Z',
+        updatedAt: '2022-01-22T19:51:53Z',
       },
     },
   },

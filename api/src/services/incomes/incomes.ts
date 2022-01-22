@@ -13,6 +13,33 @@ export const income = ({ id }: Prisma.IncomeWhereUniqueInput) => {
   })
 }
 
+interface CreateIncomeArgs {
+  input: Prisma.IncomeCreateInput
+}
+
+export const createIncome = ({ input }: CreateIncomeArgs) => {
+  return db.income.create({
+    data: input,
+  })
+}
+
+interface UpdateIncomeArgs extends Prisma.IncomeWhereUniqueInput {
+  input: Prisma.IncomeUpdateInput
+}
+
+export const updateIncome = ({ id, input }: UpdateIncomeArgs) => {
+  return db.income.update({
+    data: input,
+    where: { id },
+  })
+}
+
+export const deleteIncome = ({ id }: Prisma.IncomeWhereUniqueInput) => {
+  return db.income.delete({
+    where: { id },
+  })
+}
+
 export const Income = {
   invoice: (_obj, { root }: ResolverArgs<ReturnType<typeof income>>) =>
     db.income.findUnique({ where: { id: root.id } }).invoice(),

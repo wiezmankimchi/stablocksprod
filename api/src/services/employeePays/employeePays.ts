@@ -13,6 +13,35 @@ export const employeePay = ({ id }: Prisma.EmployeePayWhereUniqueInput) => {
   })
 }
 
+interface CreateEmployeePayArgs {
+  input: Prisma.EmployeePayCreateInput
+}
+
+export const createEmployeePay = ({ input }: CreateEmployeePayArgs) => {
+  return db.employeePay.create({
+    data: input,
+  })
+}
+
+interface UpdateEmployeePayArgs extends Prisma.EmployeePayWhereUniqueInput {
+  input: Prisma.EmployeePayUpdateInput
+}
+
+export const updateEmployeePay = ({ id, input }: UpdateEmployeePayArgs) => {
+  return db.employeePay.update({
+    data: input,
+    where: { id },
+  })
+}
+
+export const deleteEmployeePay = ({
+  id,
+}: Prisma.EmployeePayWhereUniqueInput) => {
+  return db.employeePay.delete({
+    where: { id },
+  })
+}
+
 export const EmployeePay = {
   user: (_obj, { root }: ResolverArgs<ReturnType<typeof employeePay>>) =>
     db.employeePay.findUnique({ where: { id: root.id } }).user(),

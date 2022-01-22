@@ -27,6 +27,7 @@ export const schema = gql`
 
   type Query {
     employeePays: [EmployeePay!]! @requireAuth
+    employeePay(id: String!): EmployeePay @requireAuth
   }
 
   input CreateEmployeePayInput {
@@ -43,5 +44,14 @@ export const schema = gql`
     type: EmployeePayType
     frequency: Frequency
     userId: String
+  }
+
+  type Mutation {
+    createEmployeePay(input: CreateEmployeePayInput!): EmployeePay! @requireAuth
+    updateEmployeePay(
+      id: String!
+      input: UpdateEmployeePayInput!
+    ): EmployeePay! @requireAuth
+    deleteEmployeePay(id: String!): EmployeePay! @requireAuth
   }
 `

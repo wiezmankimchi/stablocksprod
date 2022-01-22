@@ -5,23 +5,23 @@ export const standard = defineScenario<Prisma.InvoiceItemCreateArgs>({
     one: {
       data: {
         name: 'String',
-        units: 4355532,
-        rate: 7810255,
-        updatedAt: '2022-01-22T19:45:34Z',
+        units: 3381755,
+        rate: 7972367,
+        updatedAt: '2022-01-22T19:51:38Z',
         invoice: {
           create: {
-            dueDate: '2022-01-22T19:45:34Z',
-            updatedAt: '2022-01-22T19:45:34Z',
+            dueDate: '2022-01-22T19:51:38Z',
+            updatedAt: '2022-01-22T19:51:38Z',
             contact: {
               create: {
-                updatedAt: '2022-01-22T19:45:34Z',
+                updatedAt: '2022-01-22T19:51:38Z',
                 user: {
                   create: {
                     firstName: 'String',
                     lastName: 'String',
-                    email: 'String8276252',
+                    email: 'String3706205',
                     otherEmails: 'String',
-                    updatedAt: '2022-01-22T19:45:34Z',
+                    updatedAt: '2022-01-22T19:51:38Z',
                   },
                 },
               },
@@ -33,23 +33,23 @@ export const standard = defineScenario<Prisma.InvoiceItemCreateArgs>({
     two: {
       data: {
         name: 'String',
-        units: 1196768,
-        rate: 4605874,
-        updatedAt: '2022-01-22T19:45:34Z',
+        units: 107919,
+        rate: 9706486,
+        updatedAt: '2022-01-22T19:51:38Z',
         invoice: {
           create: {
-            dueDate: '2022-01-22T19:45:34Z',
-            updatedAt: '2022-01-22T19:45:34Z',
+            dueDate: '2022-01-22T19:51:38Z',
+            updatedAt: '2022-01-22T19:51:38Z',
             contact: {
               create: {
-                updatedAt: '2022-01-22T19:45:34Z',
+                updatedAt: '2022-01-22T19:51:38Z',
                 user: {
                   create: {
                     firstName: 'String',
                     lastName: 'String',
-                    email: 'String5150958',
+                    email: 'String788723',
                     otherEmails: 'String',
-                    updatedAt: '2022-01-22T19:45:34Z',
+                    updatedAt: '2022-01-22T19:51:38Z',
                   },
                 },
               },

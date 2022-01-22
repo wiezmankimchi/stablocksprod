@@ -14,6 +14,7 @@ export const schema = gql`
 
   type Query {
     expenses: [Expense!]! @requireAuth
+    expense(id: String!): Expense @requireAuth
   }
 
   input CreateExpenseInput {
@@ -32,5 +33,12 @@ export const schema = gql`
     authorizedDate: DateTime
     currency: String
     categoryId: String
+  }
+
+  type Mutation {
+    createExpense(input: CreateExpenseInput!): Expense! @requireAuth
+    updateExpense(id: String!, input: UpdateExpenseInput!): Expense!
+      @requireAuth
+    deleteExpense(id: String!): Expense! @requireAuth
   }
 `

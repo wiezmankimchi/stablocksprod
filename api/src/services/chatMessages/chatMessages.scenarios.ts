@@ -5,14 +5,14 @@ export const standard = defineScenario<Prisma.ChatMessageCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-22T19:47:41Z',
+        updatedAt: '2022-01-22T19:53:51Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String7807683',
+            email: 'String9262241',
             otherEmails: 'String',
-            updatedAt: '2022-01-22T19:47:41Z',
+            updatedAt: '2022-01-22T19:53:51Z',
           },
         },
       },
@@ -20,14 +20,14 @@ export const standard = defineScenario<Prisma.ChatMessageCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-22T19:47:41Z',
+        updatedAt: '2022-01-22T19:53:51Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String3553991',
+            email: 'String7155413',
             otherEmails: 'String',
-            updatedAt: '2022-01-22T19:47:41Z',
+            updatedAt: '2022-01-22T19:53:51Z',
           },
         },
       },

@@ -13,6 +13,33 @@ export const invoice = ({ id }: Prisma.InvoiceWhereUniqueInput) => {
   })
 }
 
+interface CreateInvoiceArgs {
+  input: Prisma.InvoiceCreateInput
+}
+
+export const createInvoice = ({ input }: CreateInvoiceArgs) => {
+  return db.invoice.create({
+    data: input,
+  })
+}
+
+interface UpdateInvoiceArgs extends Prisma.InvoiceWhereUniqueInput {
+  input: Prisma.InvoiceUpdateInput
+}
+
+export const updateInvoice = ({ id, input }: UpdateInvoiceArgs) => {
+  return db.invoice.update({
+    data: input,
+    where: { id },
+  })
+}
+
+export const deleteInvoice = ({ id }: Prisma.InvoiceWhereUniqueInput) => {
+  return db.invoice.delete({
+    where: { id },
+  })
+}
+
 export const Invoice = {
   contact: (_obj, { root }: ResolverArgs<ReturnType<typeof invoice>>) =>
     db.invoice.findUnique({ where: { id: root.id } }).contact(),
