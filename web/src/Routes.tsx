@@ -9,12 +9,13 @@
 
 import { Private, Router, Route, Set } from '@redwoodjs/router'
 import AppProviderCell from 'src/components/Providers/AppProviderCell'
+import ChatProvider from 'src/components/Providers/ChatProvider'
 import DashboardLayout from 'src/layouts/DashboardLayout'
 
 const Routes = () => {
   return (
     <Router>
-      <Set wrap={[AppProviderCell]}>
+      <Set wrap={[AppProviderCell, ChatProvider]}>
         <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
         <Route path="/login" page={LoginPage} name="login" />
 
