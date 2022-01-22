@@ -13,38 +13,8 @@ export const user = ({ id }: Prisma.UserWhereUniqueInput) => {
   })
 }
 
-export const employees = () => {
-  return db.user.findMany({
-    where: {
-      roles: {
-        OR: [
-          {
-            admin: true,
-          },
-          {
-            employee: true,
-          },
-        ],
-      },
-    },
-    orderBy: {
-      lastName: 'asc',
-    },
-  })
-}
-
 interface CreateUserArgs {
   input: Prisma.UserCreateInput
-}
-
-export const createFirstUser = async ({ input }: CreateUserArgs) => {
-  const getUsers = await users()
-
-  if (getUsers.length > 0) return
-
-  return db.user.create({
-    data: input,
-  })
 }
 
 export const createUser = ({ input }: CreateUserArgs) => {
@@ -86,6 +56,8 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).supervisor(),
   employees: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).employees(),
+  pay: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).pay(),
   jobs: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).jobs(),
   applications: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
@@ -102,6 +74,12 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).ticketsAssigned(),
   ticketComments: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).ticketComments(),
+  chatsCreated: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).chatsCreated(),
+  chatsAssigned: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).chatsAssigned(),
+  chatMessages: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
+    db.user.findUnique({ where: { id: root.id } }).chatMessages(),
   projects: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>
     db.user.findUnique({ where: { id: root.id } }).projects(),
   tasksCreated: (_obj, { root }: ResolverArgs<ReturnType<typeof user>>) =>

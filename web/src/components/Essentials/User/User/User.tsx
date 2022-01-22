@@ -183,10 +183,6 @@ const User = ({ user }) => {
               <td>{user.supervisorId}</td>
             </tr>
             <tr>
-              <th>Amount</th>
-              <td>{user.amount}</td>
-            </tr>
-            <tr>
               <th>Type</th>
               <td>{user.type}</td>
             </tr>

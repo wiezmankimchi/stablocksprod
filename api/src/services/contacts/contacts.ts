@@ -47,4 +47,6 @@ export const Contact = {
     db.contact.findUnique({ where: { id: root.id } }).user(),
   notes: (_obj, { root }: ResolverArgs<ReturnType<typeof contact>>) =>
     db.contact.findUnique({ where: { id: root.id } }).notes(),
+  invoices: (_obj, { root }: ResolverArgs<ReturnType<typeof contact>>) =>
+    db.contact.findUnique({ where: { id: root.id } }).invoices(),
 }

@@ -16,7 +16,6 @@ export const QUERY = gql`
       profileImage
       position
       supervisorId
-      amount
       resume
       departments {
         name

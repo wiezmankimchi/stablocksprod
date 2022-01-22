@@ -5,15 +5,14 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:52:37Z',
+        updatedAt: '2022-01-22T19:53:32Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String7448973',
+            email: 'String5507818',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:52:37Z',
+            updatedAt: '2022-01-22T19:53:32Z',
           },
         },
       },
@@ -21,15 +20,14 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:52:37Z',
+        updatedAt: '2022-01-22T19:53:32Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String8867165',
+            email: 'String1093511',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:52:37Z',
+            updatedAt: '2022-01-22T19:53:32Z',
           },
         },
       },

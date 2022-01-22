@@ -5,23 +5,22 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:53:16Z',
+        updatedAt: '2022-01-22T19:54:18Z',
         task: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-15T20:53:16Z',
+            updatedAt: '2022-01-22T19:54:18Z',
             project: {
               create: {
                 title: 'String',
-                updatedAt: '2022-01-15T20:53:17Z',
+                updatedAt: '2022-01-22T19:54:18Z',
                 user: {
                   create: {
                     firstName: 'String',
                     lastName: 'String',
-                    email: 'String1640304',
+                    email: 'String6445565',
                     otherEmails: 'String',
-                    userTypes: 'employee',
-                    updatedAt: '2022-01-15T20:53:17Z',
+                    updatedAt: '2022-01-22T19:54:18Z',
                   },
                 },
               },
@@ -30,10 +29,9 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String6264453',
+                email: 'String5331905',
                 otherEmails: 'String',
-                userTypes: 'employee',
-                updatedAt: '2022-01-15T20:53:17Z',
+                updatedAt: '2022-01-22T19:54:18Z',
               },
             },
           },
@@ -42,10 +40,9 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String5212380',
+            email: 'String7271579',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:53:17Z',
+            updatedAt: '2022-01-22T19:54:18Z',
           },
         },
       },
@@ -53,23 +50,22 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-15T20:53:17Z',
+        updatedAt: '2022-01-22T19:54:18Z',
         task: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-15T20:53:17Z',
+            updatedAt: '2022-01-22T19:54:18Z',
             project: {
               create: {
                 title: 'String',
-                updatedAt: '2022-01-15T20:53:17Z',
+                updatedAt: '2022-01-22T19:54:18Z',
                 user: {
                   create: {
                     firstName: 'String',
                     lastName: 'String',
-                    email: 'String1557305',
+                    email: 'String525682',
                     otherEmails: 'String',
-                    userTypes: 'employee',
-                    updatedAt: '2022-01-15T20:53:17Z',
+                    updatedAt: '2022-01-22T19:54:18Z',
                   },
                 },
               },
@@ -78,10 +74,9 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String6512787',
+                email: 'String2847634',
                 otherEmails: 'String',
-                userTypes: 'employee',
-                updatedAt: '2022-01-15T20:53:17Z',
+                updatedAt: '2022-01-22T19:54:18Z',
               },
             },
           },
@@ -90,10 +85,9 @@ export const standard = defineScenario<Prisma.TaskCommentCreateArgs>({
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String6689504',
+            email: 'String6996953',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:53:17Z',
+            updatedAt: '2022-01-22T19:54:18Z',
           },
         },
       },

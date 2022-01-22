@@ -6,15 +6,14 @@ export const standard = defineScenario<Prisma.JobCreateArgs>({
       data: {
         title: 'String',
         description: 'String',
-        updatedAt: '2022-01-15T20:51:41Z',
+        updatedAt: '2022-01-22T19:52:27Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String8139279',
+            email: 'String288586',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:51:41Z',
+            updatedAt: '2022-01-22T19:52:27Z',
           },
         },
       },
@@ -23,15 +22,14 @@ export const standard = defineScenario<Prisma.JobCreateArgs>({
       data: {
         title: 'String',
         description: 'String',
-        updatedAt: '2022-01-15T20:51:41Z',
+        updatedAt: '2022-01-22T19:52:27Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String9149423',
+            email: 'String6628944',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:51:41Z',
+            updatedAt: '2022-01-22T19:52:27Z',
           },
         },
       },

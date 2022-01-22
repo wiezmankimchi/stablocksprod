@@ -15,8 +15,6 @@ export const QUERY = gql`
       profileImage
       position
       supervisorId
-      amount
-      payType
       resume
       updatedAt
       createdAt

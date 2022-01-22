@@ -1,21 +1,22 @@
 import type { Prisma } from '@prisma/client'
 
 import { db } from 'src/lib/db'
-import { requireAuth } from 'src/lib/auth'
 
-export const organization = () => {
-  return db.organization.findFirst()
+export const organizations = () => {
+  return db.organization.findMany()
+}
+
+export const organization = ({ id }: Prisma.OrganizationWhereUniqueInput) => {
+  return db.organization.findUnique({
+    where: { id },
+  })
 }
 
 interface CreateOrganizationArgs {
   input: Prisma.OrganizationCreateInput
 }
 
-export const createOrganization = async ({ input }: CreateOrganizationArgs) => {
-  const organization = await db.organization.findFirst()
-
-  if (organization) return
-
+export const createOrganization = ({ input }: CreateOrganizationArgs) => {
   return db.organization.create({
     data: input,
   })
@@ -25,11 +26,17 @@ interface UpdateOrganizationArgs extends Prisma.OrganizationWhereUniqueInput {
   input: Prisma.OrganizationUpdateInput
 }
 
-export const updateOrganization = ({ input }: UpdateOrganizationArgs) => {
-  requireAuth({ roles: ['admin'] })
-
+export const updateOrganization = ({ id, input }: UpdateOrganizationArgs) => {
   return db.organization.update({
     data: input,
-    where: { id: 1 },
+    where: { id },
+  })
+}
+
+export const deleteOrganization = ({
+  id,
+}: Prisma.OrganizationWhereUniqueInput) => {
+  return db.organization.delete({
+    where: { id },
   })
 }

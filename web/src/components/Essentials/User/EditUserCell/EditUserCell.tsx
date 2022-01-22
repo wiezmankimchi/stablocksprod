@@ -19,8 +19,6 @@ export const QUERY = gql`
       profileImage
       position
       supervisorId
-      amount
-      payType
       resume
       updatedAt
       createdAt
@@ -39,8 +37,6 @@ const UPDATE_USER_MUTATION = gql`
       profileImage
       position
       supervisorId
-      amount
-      payType
       resume
       updatedAt
       createdAt

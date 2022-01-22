@@ -4,30 +4,28 @@ export const standard = defineScenario<Prisma.RoleCreateArgs>({
   role: {
     one: {
       data: {
-        updatedAt: '2022-01-19T11:08:17Z',
+        updatedAt: '2022-01-22T19:54:26Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String2884522',
+            email: 'String9601383',
             otherEmails: 'String',
-            userTypes: 'admin',
-            updatedAt: '2022-01-19T11:08:17Z',
+            updatedAt: '2022-01-22T19:54:26Z',
           },
         },
       },
     },
     two: {
       data: {
-        updatedAt: '2022-01-19T11:08:17Z',
+        updatedAt: '2022-01-22T19:54:26Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String56669',
+            email: 'String654709',
             otherEmails: 'String',
-            userTypes: 'admin',
-            updatedAt: '2022-01-19T11:08:17Z',
+            updatedAt: '2022-01-22T19:54:26Z',
           },
         },
       },

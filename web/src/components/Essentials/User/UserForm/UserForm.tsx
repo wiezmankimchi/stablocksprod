@@ -97,23 +97,6 @@ const UserForm = (props) => {
                   />
                   <FieldError name="supervisorId" className="rw-field-error" />
                 </div>
-                <div>
-                  <Label name="payType">Pay Type</Label>
-                  <TextField
-                    name="payType"
-                    defaultValue={props.user?.type}
-                    validation={{ required: true }}
-                  />
-                  <FieldError name="payType" className="rw-field-error" />
-                </div>
-                <div>
-                  <Label name="amount">Pay Amount</Label>
-                  <NumberField
-                    name="amount"
-                    defaultValue={props.user?.amount}
-                  />
-                  <FieldError name="amount" className="rw-field-error" />
-                </div>
               </>
             )}
             {!props.new && (

@@ -5,15 +5,14 @@ export const standard = defineScenario<Prisma.ProjectCreateArgs>({
     one: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-15T20:52:58Z',
+        updatedAt: '2022-01-22T19:54:00Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String534098',
+            email: 'String1939833',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:52:58Z',
+            updatedAt: '2022-01-22T19:54:00Z',
           },
         },
       },
@@ -21,15 +20,14 @@ export const standard = defineScenario<Prisma.ProjectCreateArgs>({
     two: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-15T20:52:58Z',
+        updatedAt: '2022-01-22T19:54:00Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String6142341',
+            email: 'String4122797',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:52:58Z',
+            updatedAt: '2022-01-22T19:54:00Z',
           },
         },
       },

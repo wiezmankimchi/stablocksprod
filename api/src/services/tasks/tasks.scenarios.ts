@@ -5,19 +5,18 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
     one: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-15T20:53:10Z',
+        updatedAt: '2022-01-22T19:54:08Z',
         project: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-15T20:53:10Z',
+            updatedAt: '2022-01-22T19:54:08Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String2313779',
+                email: 'String4999662',
                 otherEmails: 'String',
-                userTypes: 'employee',
-                updatedAt: '2022-01-15T20:53:10Z',
+                updatedAt: '2022-01-22T19:54:08Z',
               },
             },
           },
@@ -26,10 +25,9 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String7747516',
+            email: 'String3742079',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:53:10Z',
+            updatedAt: '2022-01-22T19:54:08Z',
           },
         },
       },
@@ -37,19 +35,18 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
     two: {
       data: {
         title: 'String',
-        updatedAt: '2022-01-15T20:53:10Z',
+        updatedAt: '2022-01-22T19:54:08Z',
         project: {
           create: {
             title: 'String',
-            updatedAt: '2022-01-15T20:53:10Z',
+            updatedAt: '2022-01-22T19:54:08Z',
             user: {
               create: {
                 firstName: 'String',
                 lastName: 'String',
-                email: 'String5006005',
+                email: 'String6925994',
                 otherEmails: 'String',
-                userTypes: 'employee',
-                updatedAt: '2022-01-15T20:53:10Z',
+                updatedAt: '2022-01-22T19:54:08Z',
               },
             },
           },
@@ -58,10 +55,9 @@ export const standard = defineScenario<Prisma.TaskCreateArgs>({
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String4255200',
+            email: 'String8747139',
             otherEmails: 'String',
-            userTypes: 'employee',
-            updatedAt: '2022-01-15T20:53:10Z',
+            updatedAt: '2022-01-22T19:54:08Z',
           },
         },
       },
