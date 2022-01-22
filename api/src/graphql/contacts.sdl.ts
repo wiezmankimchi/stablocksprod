@@ -7,9 +7,15 @@ export const schema = gql`
     phone: Int
     company: Company
     companyId: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
     user: User!
     userId: String!
     notes: [ContactNote]!
+    invoices: [Invoice]!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -25,6 +31,11 @@ export const schema = gql`
     email: String
     phone: Int
     companyId: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
     userId: String!
   }
 
@@ -34,6 +45,11 @@ export const schema = gql`
     email: String
     phone: Int
     companyId: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
     userId: String
   }
 

@@ -1,12 +1,14 @@
 export const schema = gql`
   type Role {
     id: String!
-    userId: String!
     user: User!
+    userId: String!
     admin: Boolean!
     employee: Boolean!
     external: Boolean!
     departmentAdmin: Boolean!
+    financeAdmin: Boolean!
+    finance: Boolean!
     hrAdmin: Boolean!
     hr: Boolean!
     recruitingAdmin: Boolean!
@@ -36,6 +38,8 @@ export const schema = gql`
     employee: Boolean!
     external: Boolean!
     departmentAdmin: Boolean!
+    financeAdmin: Boolean!
+    finance: Boolean!
     hrAdmin: Boolean!
     hr: Boolean!
     recruitingAdmin: Boolean!
@@ -58,6 +62,8 @@ export const schema = gql`
     employee: Boolean
     external: Boolean
     departmentAdmin: Boolean
+    financeAdmin: Boolean
+    finance: Boolean
     hrAdmin: Boolean
     hr: Boolean
     recruitingAdmin: Boolean

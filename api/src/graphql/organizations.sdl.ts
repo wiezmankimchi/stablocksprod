@@ -1,13 +1,20 @@
 export const schema = gql`
   type Organization {
-    id: String!
+    id: Int!
     name: String!
     website: String
     logo: String
-    recruiting: Boolean
-    crm: Boolean
-    helpdesk: Boolean
-    projects: Boolean
+    email: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
+    recruiting: Boolean!
+    crm: Boolean!
+    helpdesk: Boolean!
+    projects: Boolean!
+    chatGreeting: String
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -20,25 +27,40 @@ export const schema = gql`
     name: String!
     website: String
     logo: String
+    email: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
     recruiting: Boolean
     crm: Boolean
     helpdesk: Boolean
     projects: Boolean
+    chatGreeting: String
   }
 
   input UpdateOrganizationInput {
     name: String
     website: String
     logo: String
+    email: String
+    address: String
+    addressTwo: String
+    city: String
+    state: String
+    zipCode: Int
     recruiting: Boolean
     crm: Boolean
     helpdesk: Boolean
     projects: Boolean
+    chatGreeting: String
   }
 
   type Mutation {
     createOrganization(input: CreateOrganizationInput!): Organization! @skipAuth
     updateOrganization(input: UpdateOrganizationInput!): Organization!
       @requireAuth
+    # deleteOrganization(id: Int!): Organization! @requireAuth
   }
 `
