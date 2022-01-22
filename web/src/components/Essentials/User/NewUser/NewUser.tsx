@@ -15,7 +15,7 @@ const NewUser = () => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User created')
-      navigate(routes.users())
+      navigate(routes.employees())
     },
     onError: (error) => {
       toast.error(error.message)
@@ -26,16 +26,7 @@ const NewUser = () => {
     createUser({ variables: { input } })
   }
 
-  return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New User</h2>
-      </header>
-      <div className="rw-segment-main">
-        <UserForm onSave={onSave} loading={loading} error={error} />
-      </div>
-    </div>
-  )
+  return <UserForm onSave={onSave} loading={loading} error={error} new={true} />
 }
 
 export default NewUser

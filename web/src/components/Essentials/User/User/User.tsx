@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { routes, navigate } from '@redwoodjs/router'
 import UserHeader from 'src/components/Layout/UserHeader'
-import { MailIcon } from '@heroicons/react/outline'
+import Popup from 'src/components/Elements/Popup'
+import { MailIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
+import EditUserCell from 'src/components/Essentials/User/EditUserCell'
 
 const DELETE_USER_MUTATION = gql`
   mutation DeleteUserMutation($id: String!) {
@@ -11,14 +14,6 @@ const DELETE_USER_MUTATION = gql`
     }
   }
 `
-
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
 
 const timeTag = (datetime) => {
   return (
@@ -33,12 +28,14 @@ const checkboxInputTag = (checked) => {
 }
 
 const User = ({ user }) => {
+  const [editUserOpen, setEditUserOpen] = useState(false)
+
   const fullName = `${user.firstName} ${user.lastName}`
 
   const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
     onCompleted: () => {
-      toast.success('User deleted')
-      navigate(routes.users())
+      toast.success('Employee deleted')
+      navigate(routes.employees())
     },
     onError: (error) => {
       toast.error(error.message)
@@ -64,6 +61,17 @@ const User = ({ user }) => {
         currentCrumbLabel={fullName}
         buttons={[
           {
+            label: 'Delete',
+            icon: XCircleIcon,
+            onClick: () => onDeleteClick(user.id),
+          },
+          {
+            label: 'Edit',
+            icon: PencilAltIcon,
+            onClick: () => setEditUserOpen(true),
+            roles: ['admin'],
+          },
+          {
             label: 'Email',
             icon: MailIcon,
             onClick: () => {
@@ -75,6 +83,14 @@ const User = ({ user }) => {
         ]}
         search={{ label: 'employees', type: 'employee' }}
       />
+
+      <Popup
+        isOpen={editUserOpen}
+        setIsOpen={setEditUserOpen}
+        title={`Edit ${fullName}`}
+      >
+        <EditUserCell id={user.id} />
+      </Popup>
 
       <div className="mt-8 mx-auto grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
         <div className="space-y-6 lg:col-start-1 lg:col-span-2">
@@ -189,15 +205,6 @@ const User = ({ user }) => {
           </tbody>
         </table>
       </div>
-      <nav className="rw-button-group">
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(user.id)}
-        >
-          Delete
-        </button>
-      </nav>
     </>
   )
 }

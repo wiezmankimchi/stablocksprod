@@ -58,7 +58,7 @@ export const Success = ({ user }: CellSuccessProps<EditUserById>) => {
   const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User updated')
-      navigate(routes.users())
+      navigate(routes.employees())
     },
     onError: (error) => {
       toast.error(error.message)
@@ -70,13 +70,6 @@ export const Success = ({ user }: CellSuccessProps<EditUserById>) => {
   }
 
   return (
-    <div className="rw-segment">
-      <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit User {user.id}</h2>
-      </header>
-      <div className="rw-segment-main">
-        <UserForm user={user} onSave={onSave} error={error} loading={loading} />
-      </div>
-    </div>
+    <UserForm user={user} onSave={onSave} error={error} loading={loading} />
   )
 }
