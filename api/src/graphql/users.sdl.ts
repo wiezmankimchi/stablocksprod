@@ -7,7 +7,7 @@ export const schema = gql`
     email: String!
     otherEmails: [String]!
     profileImage: String
-    roles: [Role]!
+    roles: Role
     position: String
     departments: [Department]!
     supervisorId: String

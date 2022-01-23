@@ -7,16 +7,14 @@ export const employees = () => {
   return db.user.findMany({
     where: {
       roles: {
-        every: {
-          OR: [
-            {
-              admin: true,
-            },
-            {
-              employee: true,
-            },
-          ],
-        },
+        OR: [
+          {
+            admin: true,
+          },
+          {
+            employee: true,
+          },
+        ],
       },
     },
     orderBy: {

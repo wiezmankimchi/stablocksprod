@@ -40,7 +40,7 @@ model User {
   email           String          @unique
   otherEmails     String[]
   profileImage    String?
-  roles           Role[]
+  roles           Role?
   // Organization
   position        String?
   departments     Department[]
