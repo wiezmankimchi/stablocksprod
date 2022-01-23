@@ -73,6 +73,11 @@ const Navigation = () => {
           authorized: useAuthorization(['admin', 'employee']),
         },
         {
+          name: 'Departments',
+          to: routes.departments(),
+          authorized: useAuthorization(['admin', 'employee']),
+        },
+        {
           name: 'Settings',
           to: routes.organizationSettings(),
           authorized: useAuthorization(['admin']),
@@ -81,13 +86,13 @@ const Navigation = () => {
     },
     {
       name: 'Contacts',
-      to: '#',
+      to: routes.contacts(),
       icon: IdentificationIcon,
       authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
       children: [
         {
           name: 'Companies',
-          to: '#',
+          to: routes.companies(),
           authorized: useAuthorization(['admin', 'crmAdmin', 'crm']),
         },
       ],
@@ -106,23 +111,23 @@ const Navigation = () => {
     },
     {
       name: 'Finance',
-      to: '#',
+      to: routes.finance(),
       icon: CashIcon,
       authorized: useAuthorization(['admin']),
       children: [
         {
           name: 'Accounting',
-          to: '#',
+          to: routes.accounting(),
           authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
         },
         {
           name: 'Income',
-          to: '#',
+          to: routes.incomes(),
           authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
         },
         {
           name: 'Expenses',
-          to: '#',
+          to: routes.expenses(),
           authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
         },
       ],
@@ -142,7 +147,7 @@ const Navigation = () => {
     },
     {
       name: 'Recruiting',
-      to: '#',
+      to: routes.recruiting(),
       icon: BriefcaseIcon,
       authorized: useAuthorization([
         'admin',
@@ -153,7 +158,7 @@ const Navigation = () => {
       children: [
         {
           name: 'Jobs',
-          to: '#',
+          to: routes.jobs(),
           authorized: useAuthorization([
             'admin',
             'recruitingAdmin',
@@ -163,7 +168,7 @@ const Navigation = () => {
         },
         {
           name: 'Applications',
-          to: '#',
+          to: routes.applications(),
           authorized: useAuthorization([
             'admin',
             'recruitingAdmin',
@@ -175,23 +180,27 @@ const Navigation = () => {
     },
     {
       name: 'Helpdesk',
-      to: '#',
+      to: routes.helpdesk(),
       icon: SupportIcon,
       authorized: useAuthorization([]),
       children: [
-        { name: 'Tickets', to: '#', authorized: useAuthorization([]) },
-        { name: 'Chat', to: '#', authorized: useAuthorization([]) },
+        {
+          name: 'Tickets',
+          to: routes.tickets(),
+          authorized: useAuthorization([]),
+        },
+        { name: 'Chat', to: routes.chat(), authorized: useAuthorization([]) },
       ],
     },
     {
       name: 'Projects',
-      to: '#',
+      to: routes.projects(),
       icon: TemplateIcon,
       authorized: useAuthorization(['admin', 'employee']),
       children: [
         {
           name: 'Tasks',
-          to: '#',
+          to: routes.tasks(),
           authorized: useAuthorization(['admin', 'employee']),
         },
       ],
