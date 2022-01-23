@@ -7,7 +7,16 @@ const ProfilePage = () => {
   const { currentUser, hasRole } = useAuth()
 
   if (hasRole(['admin', 'employee'])) {
-    return <Redirect to={routes.employee({ id: currentUser.id })} />
+    return (
+      <Redirect
+        to={routes.employee({
+          id:
+            typeof currentUser.id === 'string'
+              ? currentUser.id
+              : currentUser.id.toString(),
+        })}
+      />
+    )
   }
 
   return (

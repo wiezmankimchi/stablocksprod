@@ -21,9 +21,9 @@ const ChatProvider = ({ children }: ChatProviderProps) => {
   const lastMessageRef = useRef(null)
 
   const { currentUser } = useAuth()
-  const userRoles = currentUser.roles
+  const userRoles = currentUser?.roles
 
-  if (userRoles.includes('admin') || userRoles.includes('employee')) {
+  if (userRoles?.includes('admin') || userRoles?.includes('employee')) {
     // return children
   }
 
