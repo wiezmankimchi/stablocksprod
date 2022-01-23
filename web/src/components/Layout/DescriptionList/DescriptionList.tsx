@@ -6,6 +6,7 @@ interface DescriptionListProps {
   description?: string
   onSubmit: (data: any) => void
   isSaved: boolean
+  loading?: boolean
   error: any
   children: React.ReactNode
 }
@@ -15,6 +16,7 @@ const DescriptionList = ({
   description,
   onSubmit = () => {},
   isSaved,
+  loading,
   error,
   children,
 }: DescriptionListProps) => {
@@ -47,7 +49,11 @@ const DescriptionList = ({
           >
             {editAll ? 'Cancel' : 'Edit'}
           </button>
-          {editAll && <Submit className="btn btn-primary">Save</Submit>}
+          {editAll && (
+            <Submit className="btn btn-primary" disabled={loading}>
+              Save
+            </Submit>
+          )}
         </div>
       </div>
 
@@ -87,7 +93,9 @@ const DescriptionList = ({
               Cancel
             </button>
 
-            <Submit className="btn btn-primary">Save</Submit>
+            <Submit className="btn btn-primary" disabled={loading}>
+              Save
+            </Submit>
           </div>
         </div>
       )}

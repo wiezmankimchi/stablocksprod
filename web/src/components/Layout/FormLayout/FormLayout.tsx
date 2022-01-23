@@ -8,6 +8,7 @@ interface FormFieldsProps {
 interface FormSectionProps {
   title?: string
   description?: string
+  singleLine?: boolean
   children?: React.ReactNode
 }
 
@@ -35,6 +36,7 @@ export const FormFields = ({ singleLine, children }: FormFieldsProps) => {
 export const FormSection = ({
   title,
   description,
+  singleLine,
   children,
 }: FormSectionProps) => {
   return (
@@ -49,7 +51,13 @@ export const FormSection = ({
           )}
         </div>
       )}
-      {children}
+      <div
+        className={`${
+          !singleLine ? 'sm:grid-cols-6 ' : ''
+        }mt-6 grid grid-cols-1 gap-y-6 gap-x-4`}
+      >
+        {children}
+      </div>
     </div>
   )
 }

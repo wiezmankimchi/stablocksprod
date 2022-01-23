@@ -26,10 +26,15 @@ const Routes = () => {
             <Route path="/profile" page={ProfilePage} name="profile" />
 
             <Private unauthenticated="home" role={['admin', 'employee']}>
-              <Private unauthenticated="home" role={['admin', 'helpdeskAdmin', 'helpdesk']}>
+              <Private unauthenticated="home" role={['admin', 'projectsAdmin', 'projects']}>
+                <Route path="/projects/tasks/{id}/edit" page={ProjectsTaskEditTaskPage} name="editTask" />
+                <Route path="/projects/tasks/{id}" page={ProjectsTaskTaskPage} name="task" />
                 <Route path="/projects/tasks" page={ProjectsTaskTasksPage} name="tasks" />
-                <Route path="/projects" page={ProjectsProjectsPage} name="projects" />
+                <Route path="/projects/{id}/edit" page={ProjectsProjectEditProjectPage} name="editProject" />
+                <Route path="/projects/{id}" page={ProjectsProjectProjectPage} name="project" />
+                <Route path="/projects" page={ProjectsProjectProjectsPage} name="projects" />
               </Private>
+
               <Private unauthenticated="home" role={['admin', 'helpdeskAdmin', 'helpdesk']}>
                 <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
                 <Route path="/helpdesk/tickets" page={HelpdeskTicketTicketsPage} name="tickets" />

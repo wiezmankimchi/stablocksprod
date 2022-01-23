@@ -1,5 +1,6 @@
-import { Link, routes } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import PageTitle from 'src/components/Layout/PageTitle'
+import TasksCell from 'src/components/Cells/Task/TasksCell'
 
 const TasksPage = () => {
   return (
@@ -11,13 +12,7 @@ const TasksPage = () => {
         search={{ label: 'tasks', type: 'task' }}
       />
 
-      <p>
-        Find me in <code>./web/src/pages/TasksPage/TasksPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>tasks</code>, link to me with `
-        <Link to={routes.tasks()}>Tasks</Link>`
-      </p>
+      <TasksCell />
     </>
   )
 }
