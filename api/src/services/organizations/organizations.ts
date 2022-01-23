@@ -2,14 +2,8 @@ import type { Prisma } from '@prisma/client'
 
 import { db } from 'src/lib/db'
 
-export const organizations = () => {
-  return db.organization.findMany()
-}
-
-export const organization = ({ id }: Prisma.OrganizationWhereUniqueInput) => {
-  return db.organization.findUnique({
-    where: { id },
-  })
+export const organization = () => {
+  return db.organization.findFirst()
 }
 
 interface CreateOrganizationArgs {
