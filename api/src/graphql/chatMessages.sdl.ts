@@ -3,6 +3,8 @@ export const schema = gql`
     id: String!
     user: User!
     userId: String!
+    chat: Chat!
+    chatId: String!
     viewed: Boolean!
     message: String!
     updatedAt: DateTime!
@@ -16,12 +18,14 @@ export const schema = gql`
 
   input CreateChatMessageInput {
     userId: String!
+    chatId: String!
     viewed: Boolean!
     message: String!
   }
 
   input UpdateChatMessageInput {
     userId: String
+    chatId: String
     viewed: Boolean
     message: String
   }

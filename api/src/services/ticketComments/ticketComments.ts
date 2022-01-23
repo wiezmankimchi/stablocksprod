@@ -45,4 +45,6 @@ export const deleteTicketComment = ({
 export const TicketComment = {
   user: (_obj, { root }: ResolverArgs<ReturnType<typeof ticketComment>>) =>
     db.ticketComment.findUnique({ where: { id: root.id } }).user(),
+  Ticket: (_obj, { root }: ResolverArgs<ReturnType<typeof ticketComment>>) =>
+    db.ticketComment.findUnique({ where: { id: root.id } }).Ticket(),
 }

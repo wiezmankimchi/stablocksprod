@@ -10,6 +10,7 @@ export const schema = gql`
     assigneeId: String
     task: Task
     taskId: String
+    comments: [TicketComment]!
     updatedAt: DateTime!
     createdAt: DateTime!
   }

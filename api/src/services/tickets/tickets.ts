@@ -47,4 +47,6 @@ export const Ticket = {
     db.ticket.findUnique({ where: { id: root.id } }).assignee(),
   task: (_obj, { root }: ResolverArgs<ReturnType<typeof ticket>>) =>
     db.ticket.findUnique({ where: { id: root.id } }).task(),
+  comments: (_obj, { root }: ResolverArgs<ReturnType<typeof ticket>>) =>
+    db.ticket.findUnique({ where: { id: root.id } }).comments(),
 }

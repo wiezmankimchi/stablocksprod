@@ -26,15 +26,17 @@ describe('ticketComments', () => {
   scenario('creates a ticketComment', async (scenario: StandardScenario) => {
     const result = await createTicketComment({
       input: {
-        message: 'String',
         userId: scenario.ticketComment.two.userId,
-        updatedAt: '2022-01-15T20:52:37Z',
+        ticketId: scenario.ticketComment.two.ticketId,
+        message: 'String',
+        updatedAt: '2022-01-23T14:28:09Z',
       },
     })
 
-    expect(result.message).toEqual('String')
     expect(result.userId).toEqual(scenario.ticketComment.two.userId)
-    expect(result.updatedAt.toString()).toEqual('2022-01-15T20:52:37.000Z')
+    expect(result.ticketId).toEqual(scenario.ticketComment.two.ticketId)
+    expect(result.message).toEqual('String')
+    expect(result.updatedAt).toEqual('2022-01-23T14:28:09Z')
   })
 
   scenario('updates a ticketComment', async (scenario: StandardScenario) => {

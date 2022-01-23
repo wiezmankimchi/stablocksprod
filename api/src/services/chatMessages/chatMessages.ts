@@ -45,4 +45,6 @@ export const deleteChatMessage = ({
 export const ChatMessage = {
   user: (_obj, { root }: ResolverArgs<ReturnType<typeof chatMessage>>) =>
     db.chatMessage.findUnique({ where: { id: root.id } }).user(),
+  chat: (_obj, { root }: ResolverArgs<ReturnType<typeof chatMessage>>) =>
+    db.chatMessage.findUnique({ where: { id: root.id } }).chat(),
 }

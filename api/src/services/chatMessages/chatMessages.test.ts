@@ -27,14 +27,16 @@ describe('chatMessages', () => {
     const result = await createChatMessage({
       input: {
         userId: scenario.chatMessage.two.userId,
+        chatId: scenario.chatMessage.two.chatId,
         message: 'String',
-        updatedAt: '2022-01-22T19:53:51Z',
+        updatedAt: '2022-01-23T14:28:26Z',
       },
     })
 
     expect(result.userId).toEqual(scenario.chatMessage.two.userId)
+    expect(result.chatId).toEqual(scenario.chatMessage.two.chatId)
     expect(result.message).toEqual('String')
-    expect(result.updatedAt).toEqual('2022-01-22T19:53:51Z')
+    expect(result.updatedAt).toEqual('2022-01-23T14:28:26Z')
   })
 
   scenario('updates a chatMessage', async (scenario: StandardScenario) => {

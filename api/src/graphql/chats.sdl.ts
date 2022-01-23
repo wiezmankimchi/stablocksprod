@@ -5,6 +5,7 @@ export const schema = gql`
     userId: String!
     assignee: User
     assigneeId: String
+    messages: [ChatMessage]!
     updatedAt: DateTime!
     createdAt: DateTime!
   }

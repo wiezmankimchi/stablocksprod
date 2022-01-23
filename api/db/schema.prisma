@@ -23,6 +23,10 @@ model Organization {
   // Module toggles
   recruiting   Boolean  @default(true)
   crm          Boolean  @default(true)
+  marketing    Boolean  @default(true)
+  sales        Boolean  @default(true)
+  finance      Boolean  @default(true)
+  hr           Boolean  @default(true)
   helpdesk     Boolean  @default(true)
   projects     Boolean  @default(true)
   // Chat settings
@@ -263,46 +267,52 @@ model Company {
 // --------------------
 
 model Ticket {
-  id          String   @id @default(cuid())
+  id          String          @id @default(cuid())
   title       String
   description String?
-  status      Status   @default(open)
-  user        User     @relation("UserTicket", fields: [userId], references: [id])
+  status      Status          @default(open)
+  user        User            @relation("UserTicket", fields: [userId], references: [id])
   userId      String
-  assignee    User?    @relation("AssigneeTicket", fields: [assigneeId], references: [id])
+  assignee    User?           @relation("AssigneeTicket", fields: [assigneeId], references: [id])
   assigneeId  String?
-  task        Task?    @relation(fields: [taskId], references: [id])
+  task        Task?           @relation(fields: [taskId], references: [id])
   taskId      String?
+  comments    TicketComment[]
   // Times
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime        @updatedAt
+  createdAt   DateTime        @default(now())
 }
 
 model TicketComment {
   id        String   @id @default(cuid())
-  message   String
   user      User     @relation(fields: [userId], references: [id])
   userId    String
+  Ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId  String
+  message   String
   // Times
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
 
 model Chat {
-  id         String   @id @default(cuid())
-  user       User     @relation("UserChat", fields: [userId], references: [id])
+  id         String        @id @default(cuid())
+  user       User          @relation("UserChat", fields: [userId], references: [id])
   userId     String
-  assignee   User?    @relation("AssigneeChat", fields: [assigneeId], references: [id])
+  assignee   User?         @relation("AssigneeChat", fields: [assigneeId], references: [id])
   assigneeId String?
+  messages   ChatMessage[]
   // Times
-  updatedAt  DateTime @updatedAt
-  createdAt  DateTime @default(now())
+  updatedAt  DateTime      @updatedAt
+  createdAt  DateTime      @default(now())
 }
 
 model ChatMessage {
   id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
   viewed    Boolean  @default(false)
   message   String
   // Times

@@ -1,9 +1,11 @@
 export const schema = gql`
   type TicketComment {
     id: String!
-    message: String!
     user: User!
     userId: String!
+    Ticket: Ticket!
+    ticketId: String!
+    message: String!
     updatedAt: DateTime!
     createdAt: DateTime!
   }
@@ -14,13 +16,15 @@ export const schema = gql`
   }
 
   input CreateTicketCommentInput {
-    message: String!
     userId: String!
+    ticketId: String!
+    message: String!
   }
 
   input UpdateTicketCommentInput {
-    message: String
     userId: String
+    ticketId: String
+    message: String
   }
 
   type Mutation {

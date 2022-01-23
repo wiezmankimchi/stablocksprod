@@ -45,4 +45,6 @@ export const Chat = {
     db.chat.findUnique({ where: { id: root.id } }).user(),
   assignee: (_obj, { root }: ResolverArgs<ReturnType<typeof chat>>) =>
     db.chat.findUnique({ where: { id: root.id } }).assignee(),
+  messages: (_obj, { root }: ResolverArgs<ReturnType<typeof chat>>) =>
+    db.chat.findUnique({ where: { id: root.id } }).messages(),
 }

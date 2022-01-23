@@ -12,6 +12,10 @@ export const schema = gql`
     zipCode: Int
     recruiting: Boolean!
     crm: Boolean!
+    marketing: Boolean!
+    sales: Boolean!
+    finance: Boolean!
+    hr: Boolean!
     helpdesk: Boolean!
     projects: Boolean!
     chatGreeting: String
@@ -35,6 +39,10 @@ export const schema = gql`
     zipCode: Int
     recruiting: Boolean
     crm: Boolean
+    marketing: Boolean
+    sales: Boolean
+    finance: Boolean
+    hr: Boolean
     helpdesk: Boolean
     projects: Boolean
     chatGreeting: String
@@ -52,6 +60,10 @@ export const schema = gql`
     zipCode: Int
     recruiting: Boolean
     crm: Boolean
+    marketing: Boolean
+    sales: Boolean
+    finance: Boolean
+    hr: Boolean
     helpdesk: Boolean
     projects: Boolean
     chatGreeting: String

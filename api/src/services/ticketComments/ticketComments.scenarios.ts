@@ -5,14 +5,29 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     one: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-22T19:53:32Z',
+        updatedAt: '2022-01-23T14:28:09Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String5507818',
+            email: 'String4743370',
             otherEmails: 'String',
-            updatedAt: '2022-01-22T19:53:32Z',
+            updatedAt: '2022-01-23T14:28:09Z',
+          },
+        },
+        Ticket: {
+          create: {
+            title: 'String',
+            updatedAt: '2022-01-23T14:28:09Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String897046',
+                otherEmails: 'String',
+                updatedAt: '2022-01-23T14:28:09Z',
+              },
+            },
           },
         },
       },
@@ -20,14 +35,29 @@ export const standard = defineScenario<Prisma.TicketCommentCreateArgs>({
     two: {
       data: {
         message: 'String',
-        updatedAt: '2022-01-22T19:53:32Z',
+        updatedAt: '2022-01-23T14:28:09Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String1093511',
+            email: 'String7332085',
             otherEmails: 'String',
-            updatedAt: '2022-01-22T19:53:32Z',
+            updatedAt: '2022-01-23T14:28:09Z',
+          },
+        },
+        Ticket: {
+          create: {
+            title: 'String',
+            updatedAt: '2022-01-23T14:28:09Z',
+            user: {
+              create: {
+                firstName: 'String',
+                lastName: 'String',
+                email: 'String4149873',
+                otherEmails: 'String',
+                updatedAt: '2022-01-23T14:28:09Z',
+              },
+            },
           },
         },
       },
