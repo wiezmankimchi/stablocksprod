@@ -1,12 +1,15 @@
 import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import PageTitle from 'src/components/Layout/PageTitle'
 
 const JobsPage = () => {
   return (
     <>
-      <MetaTags title="Jobs" description="Jobs page" />
+      <PageTitle
+        title="Jobs"
+        breadcrumbs={[{ title: 'Recruiting', to: routes.recruiting() }]}
+        search={{ label: 'jobs', type: 'job' }}
+      />
 
-      <h1>JobsPage</h1>
       <p>
         Find me in <code>./web/src/pages/JobsPage/JobsPage.tsx</code>
       </p>

@@ -1,14 +1,18 @@
 import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import PageTitle from 'src/components/Layout/PageTitle'
 
 const ApplicationsPage = () => {
   return (
     <>
-      <MetaTags title="Applications" description="Applications page" />
+      <PageTitle
+        title="Applications"
+        breadcrumbs={[{ title: 'Recruiting', to: routes.recruiting() }]}
+        search={{ label: 'applications', type: 'application' }}
+      />
 
-      <h1>ApplicationsPage</h1>
       <p>
-        Find me in <code>./web/src/pages/ApplicationsPage/ApplicationsPage.tsx</code>
+        Find me in{' '}
+        <code>./web/src/pages/ApplicationsPage/ApplicationsPage.tsx</code>
       </p>
       <p>
         My default route is named <code>applications</code>, link to me with `

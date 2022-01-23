@@ -1,12 +1,11 @@
 import { Link, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import PageTitle from 'src/components/Layout/PageTitle'
 
 const FinancePage = () => {
   return (
     <>
-      <MetaTags title="Finance" description="Finance page" />
+      <PageTitle title="Finance" />
 
-      <h1>FinancePage</h1>
       <p>
         Find me in <code>./web/src/pages/FinancePage/FinancePage.tsx</code>
       </p>
