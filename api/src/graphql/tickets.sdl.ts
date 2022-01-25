@@ -1,6 +1,6 @@
 export const schema = gql`
   type Ticket {
-    id: String!
+    id: Int!
     title: String!
     description: String
     status: Status!
@@ -24,13 +24,13 @@ export const schema = gql`
 
   type Query {
     tickets: [Ticket!]! @requireAuth
-    ticket(id: String!): Ticket @requireAuth
+    ticket(id: Int!): Ticket @requireAuth
   }
 
   input CreateTicketInput {
     title: String!
     description: String
-    status: Status!
+    status: Status
     userId: String!
     assigneeId: String
     taskId: String
@@ -47,7 +47,7 @@ export const schema = gql`
 
   type Mutation {
     createTicket(input: CreateTicketInput!): Ticket! @requireAuth
-    updateTicket(id: String!, input: UpdateTicketInput!): Ticket! @requireAuth
-    deleteTicket(id: String!): Ticket! @requireAuth
+    updateTicket(id: Int!, input: UpdateTicketInput!): Ticket! @requireAuth
+    deleteTicket(id: Int!): Ticket! @requireAuth
   }
 `

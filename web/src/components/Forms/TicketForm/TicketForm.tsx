@@ -2,13 +2,13 @@ import { TextField, TextAreaField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/components/Layout/Form'
 
-const TaskForm = (props) => {
+const TicketForm = (props) => {
   const { currentUser } = useAuth()
 
   const onSubmit = (data) => {
-    if (!props.task?.userId) data.userId = currentUser.id
+    if (!props.ticket?.userId) data.userId = currentUser.id
 
-    props.onSave(data, props.task?.id)
+    props.onSave(data, props.ticket?.id)
   }
 
   return (
@@ -25,14 +25,14 @@ const TaskForm = (props) => {
               name: 'title',
               label: 'Title',
               element: TextField,
-              defaultValue: props.task?.title,
+              defaultValue: props.ticket?.title,
               required: true,
             },
             {
               name: 'description',
               label: 'Description',
               element: TextAreaField,
-              defaultValue: props.task?.description,
+              defaultValue: props.ticket?.description,
             },
           ],
         },
@@ -41,4 +41,4 @@ const TaskForm = (props) => {
   )
 }
 
-export default TaskForm
+export default TicketForm

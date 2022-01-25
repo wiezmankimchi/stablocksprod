@@ -63,7 +63,6 @@ export const Success = ({ task }: CellSuccessProps<FindTaskQuery>) => {
             label: 'Edit',
             icon: PencilAltIcon,
             onClick: () => navigate(routes.editTask({ id: task.id })),
-            roles: ['admin', 'tasksAdmin'],
           },
         ]}
       />

@@ -267,7 +267,7 @@ model Company {
 // --------------------
 
 model Ticket {
-  id          String          @id @default(cuid())
+  id          Int             @id @default(autoincrement())
   title       String
   description String?
   status      Status          @default(open)
@@ -288,7 +288,7 @@ model TicketComment {
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   Ticket    Ticket   @relation(fields: [ticketId], references: [id])
-  ticketId  String
+  ticketId  Int
   message   String
   // Times
   updatedAt DateTime @updatedAt

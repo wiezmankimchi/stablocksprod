@@ -37,6 +37,8 @@ const Routes = () => {
 
               <Private unauthenticated="home" role={['admin', 'helpdeskAdmin', 'helpdesk']}>
                 <Route path="/helpdesk/chat" page={HelpdeskChatChatPage} name="chat" />
+                <Route path="/helpdesk/tickets/{id:Int}/edit" page={HelpdeskTicketEditTicketPage} name="editTicket" />
+                <Route path="/helpdesk/tickets/{id:Int}" page={HelpdeskTicketTicketPage} name="ticket" />
                 <Route path="/helpdesk/tickets" page={HelpdeskTicketTicketsPage} name="tickets" />
                 <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
               </Private>

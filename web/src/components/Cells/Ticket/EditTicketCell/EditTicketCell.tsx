@@ -1,31 +1,26 @@
 import { useState } from 'react'
-import type { EditTask } from 'types/graphql'
+import type { FindEditTicketQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { routes } from '@redwoodjs/router'
 import Loader from 'src/components/Elements/Loader'
 import PageTitle from 'src/components/Layout/PageTitle'
-import TaskForm from 'src/components/Forms/TaskForm'
+import TicketForm from 'src/components/Forms/TicketForm'
 
 export const QUERY = gql`
-  query EditTask($id: String!) {
-    task(id: $id) {
+  query FindEditTicketQuery($id: Int!) {
+    ticket(id: $id) {
       id
       title
       description
-      project {
-        id
-        title
-        description
-      }
     }
   }
 `
 
-const UPDATE_TASK_MUTATION = gql`
-  mutation UpdateTaskMutation($id: String!, $input: UpdateTaskInput!) {
-    updateTask(id: $id, input: $input) {
+const UPDATE_TICKET_MUTATION = gql`
+  mutation UpdateTicketMutation($id: Int!, $input: UpdateTicketInput!) {
+    updateTicket(id: $id, input: $input) {
       id
       title
       description
@@ -36,18 +31,17 @@ const UPDATE_TASK_MUTATION = gql`
 export const Loading = () => (
   <>
     <PageTitle
-      title={`Edit Task`}
+      title={`Edit Ticket`}
       currentCrumbLabel="Edit"
       breadcrumbs={[
-        { title: 'Projects', to: routes.projects() },
+        { title: 'Helpdesk', to: routes.helpdesk() },
         {
-          title: 'Project',
-          to: '#',
+          title: 'Tickets',
+          to: routes.tickets(),
         },
-        { title: 'Tasks', to: routes.tasks() },
-        { title: 'Task', to: '#' },
+        { title: 'Ticket', to: '#' },
       ]}
-      search={{ label: 'tasks', type: 'task' }}
+      search={{ label: 'tickets', type: 'ticket' }}
     />
     <Loader />
   </>
@@ -59,12 +53,12 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ task }: CellSuccessProps<EditTask>) => {
+export const Success = ({ ticket }: CellSuccessProps<FindEditTicketQuery>) => {
   const [isSaved, setIsSaved] = useState(false)
-  const [updateTask, { loading, error }] = useMutation(UPDATE_TASK_MUTATION, {
+  const [updateTask, { loading, error }] = useMutation(UPDATE_TICKET_MUTATION, {
     onCompleted: () => {
       setIsSaved(true)
-      toast.success('Task updated')
+      toast.success('Ticket updated')
     },
     onError: (error) => {
       toast.error(error.message)
@@ -78,25 +72,24 @@ export const Success = ({ task }: CellSuccessProps<EditTask>) => {
   return (
     <>
       <PageTitle
-        title={`Edit Task`}
+        title={`Edit Ticket`}
         currentCrumbLabel="Edit"
         breadcrumbs={[
-          { title: 'Projects', to: routes.projects() },
+          { title: 'Helpdesk', to: routes.helpdesk() },
           {
-            title: task.project.title,
-            to: routes.project({ id: task.project.id }),
+            title: 'Tickets',
+            to: routes.tickets(),
           },
-          { title: 'Tasks', to: routes.tasks() },
-          { title: task.title, to: routes.project({ id: task.id }) },
+          { title: `#${ticket.id}`, to: routes.ticket({ id: ticket.id }) },
         ]}
-        search={{ label: 'tasks', type: 'task' }}
+        search={{ label: 'tickets', type: 'ticket' }}
       />
-      <TaskForm
+      <TicketForm
         onSave={onSave}
         loading={loading}
         error={error}
         isSaved={isSaved}
-        task={task}
+        ticket={ticket}
       />
     </>
   )
