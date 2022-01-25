@@ -1,16 +1,15 @@
 import NewForm from 'src/components/Layout/NewForm'
 import EditForm from 'src/components/Layout/EditForm'
 
-import type { InputFieldProps } from '@redwoodjs/forms'
-
 export interface FormField {
   name: string
   label: string
-  element: React.ForwardRefExoticComponent<Omit<InputFieldProps, 'type'>>
-  defaultValue: string | undefined
+  element: React.ForwardRefExoticComponent<any>
+  defaultValue: string | boolean | number | undefined
   required?: boolean
   newHide?: boolean
   editHide?: boolean
+  prepend?: string
 }
 
 export interface Section {

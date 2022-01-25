@@ -8,11 +8,19 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import { Link, Redirect, routes, useLocation } from '@redwoodjs/router'
+import {
+  Link,
+  Redirect,
+  SkipNavLink,
+  routes,
+  useLocation,
+} from '@redwoodjs/router'
 import { AppContext } from 'src/components/Providers/AppProviderCell'
 import Navigation from 'src/components/Layout/Navigation'
 import Popup from 'src/components/Elements/Popup'
 import Logo from 'src/lib/logo.svg'
+
+import '@reach/skip-nav/styles.css'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -59,6 +67,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 
   return (
     <>
+      <SkipNavLink contentId="main" />
       <div className="flex-1 min-h-full">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -273,7 +282,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
           </div>
 
-          <main className="min-h-full">
+          <main id="main" className="min-h-full">
             <div className="p-6 pb-20 md:px-12 min-h-full">{children}</div>
           </main>
         </div>

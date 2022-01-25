@@ -24,16 +24,9 @@ const EditForm = (props: FormProps) => {
                   !field.editHide && (
                     <DescriptionListItem
                       key={i}
-                      name={field.name}
-                      label={field.label}
-                      value={field.defaultValue}
-                    >
-                      <field.element
-                        name={field.name}
-                        defaultValue={field.defaultValue}
-                        validation={{ required: field.required }}
-                      />
-                    </DescriptionListItem>
+                      field={field}
+                      first={i === 0 ? true : false}
+                    />
                   )
               )}
             </DescriptionList>

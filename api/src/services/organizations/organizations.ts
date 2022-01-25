@@ -20,10 +20,12 @@ interface UpdateOrganizationArgs extends Prisma.OrganizationWhereUniqueInput {
   input: Prisma.OrganizationUpdateInput
 }
 
-export const updateOrganization = ({ id, input }: UpdateOrganizationArgs) => {
+export const updateOrganization = async ({ input }: UpdateOrganizationArgs) => {
+  const org = await organization()
+
   return db.organization.update({
     data: input,
-    where: { id },
+    where: { id: org.id },
   })
 }
 

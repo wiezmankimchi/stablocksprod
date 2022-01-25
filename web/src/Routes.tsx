@@ -61,17 +61,17 @@ const Routes = () => {
                 <Route path="/contacts" page={CRMContactContactsPage} name="contacts" />
               </Private>
 
-              <Route path="/organization/departments" page={EssentialsDepartmentDepartmentsPage} name="departments" />
+              <Route path="/organization/departments" page={BasicsDepartmentDepartmentsPage} name="departments" />
               <Route path="/organization/employees/{id}/roles" page={EssentialsRoleRolesPage} name="employeeRoles" />
               <Route path="/organization/employees/{id}/edit" page={EssentialsUserEditUserPage} name="editEmployees" />
               <Route path="/organization/employees/{id}" page={EssentialsUserUserPage} name="employee" />
               <Route path="/organization/employees" page={EssentialsUserEmployeesPage} name="employees" />
 
               <Private unauthenticated="organization" role={['admin']}>
-                <Route path="/organization/settings" page={EssentialsOrganizationOrganizationSettingsPage} name="organizationSettings" />
+                <Route path="/organization/settings" page={BasicsOrganizationOrganizationSettingsPage} name="organizationSettings" />
               </Private>
 
-              <Route path="/organization" page={EssentialsOrganizationOrganizationPage} name="organization" />
+              <Route path="/organization" page={BasicsOrganizationOrganizationPage} name="organization" />
             </Private>
 
             <Route path="/" page={HomePage} name="home" />

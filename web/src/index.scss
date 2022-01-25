@@ -24,6 +24,10 @@ main,
   [type='checkbox'] {
     @apply focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded;
   }
+
+  textarea {
+    @apply min-h-[8rem] max-h-[16rem];
+  }
 }
 
 .btn {
