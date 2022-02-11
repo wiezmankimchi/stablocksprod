@@ -1,7 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
 import NewOrganizationForm from 'src/components/Essentials/Organization/NewOrganizationForm'
+import { QUERY as ORGANIZATION_QUERY } from 'src/components/Providers/AppProviderCell'
 
 const CREATE_ORGANIZATION_MUTATION = gql`
   mutation CreateOrganizationMutation($input: CreateOrganizationInput!) {
@@ -18,6 +18,8 @@ const NewOrganization = () => {
       onCompleted: () => {
         toast.success('Organization created')
       },
+      refetchQueries: [{ query: ORGANIZATION_QUERY }],
+      awaitRefetchQueries: true,
       onError: (error) => {
         toast.error(error.message)
       },

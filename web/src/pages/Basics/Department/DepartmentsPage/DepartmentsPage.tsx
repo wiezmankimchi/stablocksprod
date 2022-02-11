@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import PageTitle from 'src/components/Layout/PageTitle'
 
 const DepartmentsPage = () => {
@@ -6,18 +6,9 @@ const DepartmentsPage = () => {
     <>
       <PageTitle
         title="Departments"
+        breadcrumbs={[{ title: 'Organization', to: routes.organization() }]}
         search={{ label: 'departments', type: 'department' }}
       />
-
-      <h1>DepartmentsPage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/DepartmentsPage/DepartmentsPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>departments</code>, link to me with `
-        <Link to={routes.departments()}>Departments</Link>`
-      </p>
     </>
   )
 }
