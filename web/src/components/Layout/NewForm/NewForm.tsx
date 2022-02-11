@@ -21,7 +21,14 @@ const NewForm = (props: FormProps) => {
                 (field, i) =>
                   !field.newHide && (
                     <div key={i}>
-                      <Label name={field.name}>{field.label}</Label>
+                      <Label name={field.name}>
+                        {field.label}
+                        {field.required && (
+                          <span className="font-base text-indigo-600">
+                            {' *'}
+                          </span>
+                        )}
+                      </Label>
                       <field.element
                         name={field.name}
                         defaultValue={field.defaultValue}

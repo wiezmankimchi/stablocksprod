@@ -43,7 +43,12 @@ const DescriptionListItem = ({
 
   return (
     <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-      <dt className="text-sm font-medium text-gray-500">{field.label}</dt>
+      <dt className="text-sm font-medium text-gray-500">
+        {field.label}
+        {field.required && (
+          <span className="font-base text-indigo-600">{' *'}</span>
+        )}
+      </dt>
       <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
         {!editing ? (
           <div className="flex items-center justify-between">

@@ -1,11 +1,11 @@
 import { render } from '@redwoodjs/testing/web'
 
-import PeopleTable from './PeopleTable'
+import Table from './Table'
 
-describe('PeopleTable', () => {
+describe('Table', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<PeopleTable />)
+      render(<Table />)
     }).not.toThrow()
   })
 })
