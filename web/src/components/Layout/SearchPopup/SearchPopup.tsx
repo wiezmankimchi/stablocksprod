@@ -22,9 +22,21 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
   const { pathname } = useLocation()
 
   const [searchQuery, setSearchQuery] = useState('')
+  const [emptyResult, setEmptyResult] = useState(false)
 
   function closePopup() {
     setIsOpen(false)
+    setSearchQuery('')
+  }
+
+  const updateQuery = (e) => {
+    const query = e.target.value
+
+    if (emptyResult && !query.startsWith(searchQuery)) {
+      setEmptyResult(false)
+    }
+
+    setSearchQuery(query)
   }
 
   useEffect(() => {
@@ -69,7 +81,7 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
             leaveTo="opacity-0 scale-95"
           >
             <div className="relative mt-8 mb-16 inline-block w-full max-w-lg transform text-left align-top transition-all">
-              <Form>
+              <Form className="search-form">
                 <Label name="search" className="mb-1 text-sm text-white">
                   Search {search.label}:
                 </Label>
@@ -77,15 +89,25 @@ const SearchPopup = ({ isOpen, setIsOpen }: SearchPopupProps) => {
                   name="search"
                   className="w-full rounded-md px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-indigo-700"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={updateQuery}
                   autoComplete="off"
                 />
               </Form>
-              {searchQuery.length > 2 ? (
-                <SearchCell type={search.type} query={searchQuery} />
+              {searchQuery.length > 1 ? (
+                !emptyResult ? (
+                  <SearchCell
+                    type={search.type}
+                    query={searchQuery}
+                    setEmptyResult={setEmptyResult}
+                  />
+                ) : (
+                  <p className="mt-6 text-center text-xs text-white">
+                    No results found
+                  </p>
+                )
               ) : (
                 <p className="text-2xs mt-2 text-center text-white">
-                  Type at least three characters
+                  Type at least two characters
                 </p>
               )}
             </div>

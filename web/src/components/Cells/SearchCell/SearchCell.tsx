@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 
 import type { FindSearchQuery } from 'types/graphql'
@@ -15,9 +16,17 @@ export const QUERY = gql`
 
 export const Loading = () => <></>
 
-export const Empty = () => (
-  <p className="mt-6 text-center text-xs text-white">No results found</p>
-)
+export const Empty = ({
+  setEmptyResult,
+}: {
+  setEmptyResult: Dispatch<SetStateAction<boolean>>
+}) => {
+  useEffect(() => {
+    setEmptyResult(true)
+  }, [setEmptyResult])
+
+  return <p className="mt-6 text-center text-xs text-white">No results found</p>
+}
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -43,7 +52,14 @@ function createTo(type: string, value: string) {
   return thePath.to
 }
 
-export const Success = ({ search }: CellSuccessProps<FindSearchQuery>) => {
+export const Success = ({
+  search,
+  setEmptyResult,
+}: CellSuccessProps<FindSearchQuery>) => {
+  useEffect(() => {
+    setEmptyResult(false)
+  }, [setEmptyResult])
+
   return (
     <div className="mt-4 divide-y divide-gray-300">
       {search.map((result, i) => (
