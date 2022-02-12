@@ -1,4 +1,4 @@
-import { TextField } from '@redwoodjs/forms'
+import { TextAreaField, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
 import Form from 'src/components/Layout/Form'
 
@@ -31,7 +31,7 @@ const ProjectForm = (props) => {
             {
               name: 'description',
               label: 'Description',
-              element: TextField,
+              element: TextAreaField,
               defaultValue: props.project?.description,
             },
           ],

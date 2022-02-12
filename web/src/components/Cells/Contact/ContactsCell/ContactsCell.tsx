@@ -1,21 +1,17 @@
-import type { EmployeesQuery } from 'types/graphql'
+import type { ContactsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/components/Elements/Loader'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
-  query EmployeesQuery {
-    employees {
+  query ContactsQuery {
+    contacts {
       id
       firstName
       lastName
       email
-      profileImage
-      position
-      departments {
-        id
-      }
+      phone
     }
   }
 `
@@ -28,19 +24,19 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ employees }: CellSuccessProps<EmployeesQuery>) => {
-  const data = employees.map((employee, i) => [
+export const Success = ({ contacts }: CellSuccessProps<ContactsQuery>) => {
+  const data = contacts.map((contact, i) => [
     <Link
       key={i}
-      to={routes.employee({ id: employee.id })}
+      to={routes.contact({ id: contact.id })}
       className="font-medium text-indigo-600 hover:text-indigo-700"
-    >{`${employee.firstName} ${employee.lastName}`}</Link>,
+    >{`${contact.firstName} ${contact.lastName}`}</Link>,
     <span key={i} className="text-gray-600">
-      {employee.email}
+      {`${contact?.email}`}
     </span>,
     <Link
       key={i}
-      to={routes.employee({ id: employee.id })}
+      to={routes.contact({ id: contact.id })}
       className="text-indigo-600 hover:text-indigo-700"
     >
       View
@@ -48,15 +44,13 @@ export const Success = ({ employees }: CellSuccessProps<EmployeesQuery>) => {
   ])
 
   return (
-    <>
-      <Table
-        cols={[
-          { label: 'Name' },
-          { label: 'Email' },
-          { label: 'View', hidden: true },
-        ]}
-        rows={data}
-      />
-    </>
+    <Table
+      cols={[
+        { label: 'Name' },
+        { label: 'Email' },
+        { label: 'View', hidden: true },
+      ]}
+      rows={data}
+    />
   )
 }

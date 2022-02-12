@@ -18,10 +18,14 @@ type QueryOption = {
 const queryOptions: QueryOption[] = [
   {
     id: 'company',
+    fields: ['id', 'name', 'website'],
+    title: ['name'],
+  },
+  {
+    id: 'contact',
     fields: ['id', 'firstName', 'lastName', 'email'],
     title: ['firstName', 'lastName'],
   },
-  { id: 'contact', fields: ['id', 'name', 'website'], title: ['name'] },
   { id: 'department', fields: ['id', 'name', 'email'], title: ['name'] },
   {
     id: 'employee',

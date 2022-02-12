@@ -61,7 +61,11 @@ const Routes = () => {
                 </Private>
 
                 <Private unauthenticated="home" role={['admin', 'crmAdmin', 'crm']}>
+                  <Route path="/contacts/companies/{id}/edit" page={CRMCompanyEditCompanyPage} name="editCompany" />
+                  <Route path="/contacts/companies/{id}" page={CRMCompanyCompanyPage} name="company" />
                   <Route path="/contacts/companies" page={CRMCompanyCompaniesPage} name="companies" />
+                  <Route path="/contacts/{id}/edit" page={CRMContactEditContactPage} name="editContact" />
+                  <Route path="/contacts/{id}" page={CRMContactContactPage} name="contact" />
                   <Route path="/contacts" page={CRMContactContactsPage} name="contacts" />
                 </Private>
 

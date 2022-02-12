@@ -34,8 +34,8 @@ function classNames(...classes: string[]) {
 
 function createTo(type: string, value: string) {
   const paths = [
-    // { type: 'company', to: routes.company({ id: value }) },
-    // { type: 'contact', to: routes.contact({ id: value }) },
+    { type: 'company', to: routes.company({ id: value }) },
+    { type: 'contact', to: routes.contact({ id: value }) },
     { type: 'employee', to: routes.employee({ id: value }) },
     // { type: 'expense', to: routes.expense({ id: value }) },
     // { type: 'income', to: routes.income({ id: value }) },
