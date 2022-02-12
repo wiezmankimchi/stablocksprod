@@ -21,7 +21,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <  >Loading...</>
+export const Loading = () => <>Loading...</>
 
 export const Empty = () => <>No releases yet</>
 
@@ -45,7 +45,7 @@ export const Success = ({ releases }: CellSuccessProps<ReleasesQuery>) => {
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="divide-y divide-gray-300 p-2 text-sm text-gray-500">
-                <div className="w-full">{release.body}</div>
+                {/* <div className="w-full">{release.body}</div> */}
                 <p className="mt-4 pt-4">
                   <a
                     href={`https://github.com/stablocks/stablocks/releases/tag/${release.tag}`}
