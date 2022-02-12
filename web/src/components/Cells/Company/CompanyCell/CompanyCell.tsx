@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import type { FindCompanyQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/components/Elements/Loader'
 import PageTitle from 'src/components/Layout/PageTitle'
-import Popup from 'src/components/Elements/Popup'
-import NewCompany from 'src/components/NewComponents/NewCompany'
-import { PencilAltIcon, PlusSmIcon } from '@heroicons/react/outline'
+import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
   query FindCompanyQuery($id: String!) {
@@ -40,8 +37,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ company }: CellSuccessProps<FindCompanyQuery>) => {
-  const [isNewOpen, setIsNewOpen] = useState(false)
-
   return (
     <>
       <PageTitle
@@ -58,18 +53,8 @@ export const Success = ({ company }: CellSuccessProps<FindCompanyQuery>) => {
             onClick: () => navigate(routes.editCompany({ id: company.id })),
             roles: ['admin', 'crmAdmin', 'crm'],
           },
-          {
-            label: 'New Company',
-            icon: PlusSmIcon,
-            onClick: () => setIsNewOpen(true),
-            main: true,
-          },
         ]}
       />
-
-      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New company">
-        <NewCompany setOpen={setIsNewOpen} />
-      </Popup>
 
       <div>{JSON.stringify(company)}</div>
     </>

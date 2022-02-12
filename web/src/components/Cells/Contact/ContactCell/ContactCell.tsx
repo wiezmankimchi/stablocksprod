@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import type { FindContactQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import Loader from 'src/components/Elements/Loader'
 import PageTitle from 'src/components/Layout/PageTitle'
-import Popup from 'src/components/Elements/Popup'
-import NewContact from 'src/components/NewComponents/NewContact'
-import { PencilAltIcon, PlusSmIcon } from '@heroicons/react/outline'
+import { PencilAltIcon } from '@heroicons/react/outline'
 
 export const QUERY = gql`
   query FindContactQuery($id: String!) {
@@ -38,8 +35,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ contact }: CellSuccessProps<FindContactQuery>) => {
-  const [isNewOpen, setIsNewOpen] = useState(false)
-
   const fullName = `${contact.firstName} ${contact.lastName}`
 
   return (
@@ -55,18 +50,8 @@ export const Success = ({ contact }: CellSuccessProps<FindContactQuery>) => {
             onClick: () => navigate(routes.editContact({ id: contact.id })),
             roles: ['admin', 'crmAdmin', 'crm'],
           },
-          {
-            label: 'New Contact',
-            icon: PlusSmIcon,
-            onClick: () => setIsNewOpen(true),
-            main: true,
-          },
         ]}
       />
-
-      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New contact">
-        <NewContact setOpen={setIsNewOpen} />
-      </Popup>
 
       <div>{JSON.stringify(contact)}</div>
     </>
