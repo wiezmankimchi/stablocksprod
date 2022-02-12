@@ -15,7 +15,7 @@ const OrganizationPage = () => {
             roles: ['admin'],
           },
         ]}
-        search={{ label: 'employees', type: 'employee' }}
+        search={{ label: 'the organization', type: 'organization' }}
       />
     </>
   )

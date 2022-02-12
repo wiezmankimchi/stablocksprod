@@ -91,7 +91,7 @@ export const Success = ({
         title="Organization Settings"
         currentCrumbLabel="Settings"
         breadcrumbs={[{ title: 'Organization', to: routes.organization() }]}
-        search={{ label: 'employees', type: 'employee' }}
+        search={{ label: 'the organization', type: 'organization' }}
       />
       <OrganizationForm
         onSave={onSave}
