@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 
 import type { FindSearchQuery } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellSuccessProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
   query FindSearchQuery($type: String!, $query: String!) {
@@ -52,10 +52,11 @@ function createTo(type: string, value: string) {
   return thePath.to
 }
 
-export const Success = ({
-  search,
-  setEmptyResult,
-}: CellSuccessProps<FindSearchQuery>) => {
+interface SearchSuccessProps extends CellSuccessProps<FindSearchQuery> {
+  setEmptyResult: Dispatch<SetStateAction<boolean>>
+}
+
+export const Success = ({ search, setEmptyResult }: SearchSuccessProps) => {
   useEffect(() => {
     setEmptyResult(false)
   }, [setEmptyResult])
