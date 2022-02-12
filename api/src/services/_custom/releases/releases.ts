@@ -4,6 +4,10 @@ import config from 'src/../package.json'
 const octokit = new Octokit()
 
 export const releases = async () => {
+  const currentVersion = config.version
+
+  if (currentVersion === '0.0.0') return []
+
   const { data } = await octokit.request('GET /repos/{owner}/{repo}/releases', {
     owner: 'stablocks',
     repo: 'stablocks',
@@ -25,8 +29,6 @@ export const releases = async () => {
       body: release.body,
     })
   })
-
-  const currentVersion = config.version
 
   const currentRelease = releases.find(
     (release) => release.tag === currentVersion
