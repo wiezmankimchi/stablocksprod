@@ -17,10 +17,10 @@ const Routes = () => {
     <Router>
       <Set wrap={[AppProviderCell, ChatProvider]}>
         <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
-        <Route path="/login" page={LoginPage} name="login" />
+        <Route path="/login" page={LoginPage} name="login" prerender />
 
         <Private unauthenticated="login">
-          <Route path="/user-onboarding" page={UserOnboardingPage} name="userOnboarding" />
+          <Route path="/user-onboarding" page={UserOnboardingPage} name="userOnboarding" prerender />
 
           <Set wrap={[DashboardLayout]}>
             <Route path="/profile" page={ProfilePage} name="profile" />
@@ -78,7 +78,7 @@ const Routes = () => {
           </Set>
         </Private>
       </Set>
-      <Route notfound page={NotFoundPage} />
+      <Route notfound page={NotFoundPage} prerender />
     </Router>
   )
 }
