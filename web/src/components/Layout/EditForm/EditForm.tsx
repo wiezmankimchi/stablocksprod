@@ -1,5 +1,5 @@
-import DescriptionList from 'src/components/Layout/DescriptionList'
-import DescriptionListItem from 'src/components/Layout/DescriptionListItem'
+import DescriptionList from 'src/ui/DescriptionList'
+import DescriptionListItem from 'src/ui/DescriptionList/DescriptionListItem'
 
 import type { FormProps } from 'src/components/Layout/Form'
 

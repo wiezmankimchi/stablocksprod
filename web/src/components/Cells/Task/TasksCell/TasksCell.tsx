@@ -1,7 +1,7 @@
 import type { TasksQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
-import Loader from 'src/components/Elements/Loader'
+import Loader from 'src/ui/Loader'
 
 export const QUERY = gql`
   query TasksQuery {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Checkbox, Form, FormError, Submit } from '@redwoodjs/forms'
+import { Form, FormError, Submit } from '@redwoodjs/forms'
 
 interface DescriptionListProps {
   title: string
@@ -30,9 +30,9 @@ const DescriptionList = ({
 
   return (
     <Form onSubmit={onSubmit} error={error} className="max-w-3xl">
-      <div className="sm:flex items-center justify-between">
+      <div className="items-center justify-between sm:flex">
         <div>
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
             {title}
           </h3>
           {description && (
@@ -83,7 +83,7 @@ const DescriptionList = ({
       </div>
 
       {editAll && (
-        <div className="flex items-center sm:justify-end pt-5 border-t border-gray-200">
+        <div className="flex items-center border-t border-gray-200 pt-5 sm:justify-end">
           <div className="btn-group">
             <button
               type="button"

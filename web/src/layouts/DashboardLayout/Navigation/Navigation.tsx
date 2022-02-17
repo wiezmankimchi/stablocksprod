@@ -1,7 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import { routes, useLocation } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
-import NavLink from 'src/components/Elements/NavLink'
+import NavLink from './NavLink'
 import {
   BriefcaseIcon,
   CashIcon,
@@ -47,7 +47,7 @@ const SubMenuButton = ({ name, to, basePath }: SubMenuButtonProps) => {
       as={NavLink}
       to={to}
       basePath={basePath}
-      className="group w-full flex items-center pl-11 pr-2 py-2 text-base md:text-sm font-medium rounded-md text-left focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+      className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-left text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-gray-800 md:text-sm"
       activeClassName="bg-gray-900 text-gray-300"
       nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
     >
@@ -216,12 +216,12 @@ const Navigation = () => {
             <div key={item.name}>
               <NavLink
                 to={item.to}
-                className="group w-full flex items-center pl-2 pr-1 py-2 text-left text-base md:text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="group flex w-full items-center rounded-md py-2 pl-2 pr-1 text-left text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 md:text-sm"
                 nonActiveClassName="text-gray-300 hover:bg-gray-700 hover:text-white"
                 activeClassName="bg-gray-900 text-gray-300"
               >
                 <item.icon
-                  className="mr-3 flex-shrink-0 h-6 w-6"
+                  className="mr-3 h-6 w-6 flex-shrink-0"
                   aria-hidden="true"
                 />
                 {item.name}
@@ -241,17 +241,17 @@ const Navigation = () => {
                       pathname === item.to || pathname.startsWith(item.to)
                         ? 'bg-gray-900 text-gray-300'
                         : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                    } group w-full flex items-center pl-2 pr-1 py-2 text-left text-base md:text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-gray-800 focus:ring-indigo-500`}
+                    } group flex w-full items-center rounded-md py-2 pl-2 pr-1 text-left text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-gray-800 md:text-sm`}
                   >
                     <item.icon
-                      className="mr-3 flex-shrink-0 h-6 w-6"
+                      className="mr-3 h-6 w-6 flex-shrink-0"
                       aria-hidden="true"
                     />
                     <span className="flex-1">{item.name}</span>
                     <ChevronRightIcon
                       className={`${
-                        open ? 'text-gray-400 rotate-90' : 'text-gray-300'
-                      } ml-3 flex-shrink-0 h-4 w-4 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150`}
+                        open ? 'rotate-90 text-gray-400' : 'text-gray-300'
+                      } ml-3 h-4 w-4 flex-shrink-0 transform transition-colors duration-150 ease-in-out group-hover:text-gray-400`}
                     />
                   </Disclosure.Button>
                   <Disclosure.Panel className="space-y-1">

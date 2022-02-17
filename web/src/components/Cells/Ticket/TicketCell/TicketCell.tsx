@@ -1,7 +1,7 @@
 import type { FindTicketQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
-import Loader from 'src/components/Elements/Loader'
+import Loader from 'src/ui/Loader'
 import PageTitle from 'src/components/Layout/PageTitle'
 import { PencilAltIcon } from '@heroicons/react/outline'
 
