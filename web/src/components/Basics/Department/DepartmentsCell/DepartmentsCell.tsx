@@ -1,16 +1,28 @@
-import type { CompaniesQuery } from 'types/graphql'
+import type { DepartmentsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`
-  query CompaniesQuery {
-    companies {
+  query DepartmentsQuery {
+    departments {
       id
       name
-      website
-      phone
+      email
+      users {
+        id
+        firstName
+        lastName
+      }
+      department {
+        id
+        name
+      }
+      subDepartments {
+        id
+        name
+      }
     }
   }
 `
@@ -23,21 +35,23 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ companies }: CellSuccessProps<CompaniesQuery>) => {
-  const data = companies.map((company, i) => [
+export const Success = ({
+  departments,
+}: CellSuccessProps<DepartmentsQuery>) => {
+  const data = departments.map((department, i) => [
     <Link
       key={i}
-      to={routes.company({ id: company.id })}
+      to={routes.department({ id: department.id })}
       className="font-medium text-indigo-600 hover:text-indigo-700"
     >
-      {company.name}
+      {department.name}
     </Link>,
     <span key={i} className="text-gray-600">
-      {`${company?.website}`}
+      {`${department?.email}`}
     </span>,
     <Link
       key={i}
-      to={routes.company({ id: company.id })}
+      to={routes.department({ id: department.id })}
       className="text-indigo-600 hover:text-indigo-700"
     >
       View

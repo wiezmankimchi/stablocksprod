@@ -1,4 +1,4 @@
-import EditContactCell from 'src/components/Cells/Contact/EditContactCell'
+import EditContactCell from 'src/components/CRM/Contact/EditContactCell'
 
 const EditContactPage = ({ id }: { id: string }) => {
   return <EditContactCell id={id} />

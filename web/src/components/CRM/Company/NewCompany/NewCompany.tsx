@@ -1,8 +1,8 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import CompanyForm from 'src/components/Forms/CompanyForm'
+import CompanyForm from '../CompanyForm'
 
-import { QUERY as COMPANIES_QUERY } from 'src/components/Cells/Company/CompaniesCell'
+import { QUERY as COMPANIES_QUERY } from '../CompaniesCell'
 
 const CREATE_COMPANY_MUTATION = gql`
   mutation CreateCompanyMutation($input: CreateCompanyInput!) {

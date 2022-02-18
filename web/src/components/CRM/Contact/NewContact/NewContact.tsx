@@ -1,8 +1,8 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import ContactForm from 'src/components/Forms/ContactForm'
+import ContactForm from '../ContactForm'
 
-import { QUERY as CONTACTS_QUERY } from 'src/components/Cells/Contact/ContactsCell'
+import { QUERY as CONTACTS_QUERY } from '../ContactsCell'
 
 const CREATE_CONTACT_MUTATION = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {

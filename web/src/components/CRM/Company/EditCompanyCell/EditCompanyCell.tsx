@@ -6,7 +6,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { routes } from '@redwoodjs/router'
 import Loader from 'src/ui/Loader'
 import PageTitle from 'src/ui/PageTitle'
-import CompanyForm from 'src/components/Forms/CompanyForm'
+import CompanyForm from '../CompanyForm'
 
 export const QUERY = gql`
   query EditCompany($id: String!) {

@@ -1,4 +1,4 @@
-import EditCompanyCell from 'src/components/Cells/Company/EditCompanyCell'
+import EditCompanyCell from 'src/components/CRM/Company/EditCompanyCell'
 
 const EditCompanyPage = ({ id }: { id: string }) => {
   return <EditCompanyCell id={id} />

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
-import NewContact from 'src/components/NewComponents/NewContact'
-import ContactsCell from 'src/components/Cells/Contact/ContactsCell'
+import NewContact from 'src/components/CRM/Contact/NewContact'
+import ContactsCell from 'src/components/CRM/Contact/ContactsCell'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
 const ContactsPage = () => {

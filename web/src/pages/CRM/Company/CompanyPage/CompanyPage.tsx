@@ -1,4 +1,4 @@
-import CompanyCell from 'src/components/Cells/Company/CompanyCell'
+import CompanyCell from 'src/components/CRM/Company/CompanyCell'
 
 const CompanyPage = ({ id }: { id: string }) => {
   return <CompanyCell id={id} />
