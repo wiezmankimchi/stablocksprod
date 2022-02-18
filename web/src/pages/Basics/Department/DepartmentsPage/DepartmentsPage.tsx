@@ -1,5 +1,5 @@
 import { routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 
 const DepartmentsPage = () => {
   return (

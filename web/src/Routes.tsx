@@ -18,7 +18,7 @@ const Routes = () => {
     <Router>
       <Set wrap={[AppProviderCell]}>
         <Route path="/onboarding" page={OnboardingPage} name="onboarding" />
-        <Route path="/login" page={LoginPage} name="login" />
+        <Route path="/login" page={LoginPage} name="login" prerender />
 
         <Set wrap={[ChatProvider]}>
           {/* REQUIRES AUTH */}
@@ -96,7 +96,7 @@ const Routes = () => {
           </Private>
         </Set>
       </Set>
-      <Route notfound page={NotFoundPage} />
+      <Route notfound page={NotFoundPage} prerender />
     </Router>
   )
 }

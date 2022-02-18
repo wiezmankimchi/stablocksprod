@@ -1,5 +1,5 @@
 import { navigate, routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 import { RiSettings3Line } from 'react-icons/ri'
 
 const OrganizationPage = () => {

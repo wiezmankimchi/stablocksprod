@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { routes } from '@redwoodjs/router'
-import PageTitle from 'src/components/Layout/PageTitle'
+import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
 import NewCompany from 'src/components/NewComponents/NewCompany'
 import CompaniesCell from 'src/components/Cells/Company/CompaniesCell'
