@@ -4,8 +4,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { routes } from '@redwoodjs/router'
-import Loader from 'src/components/Elements/Loader'
-import PageTitle from 'src/components/Layout/PageTitle'
+import Loader from 'src/ui/Loader'
+import PageTitle from 'src/ui/PageTitle'
 import EmployeeForm from 'src/components/Forms/EmployeeForm'
 
 export const QUERY = gql`

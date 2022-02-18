@@ -1,6 +1,6 @@
 import { TelField, TextField } from '@redwoodjs/forms'
 import { useAuth } from '@redwoodjs/auth'
-import Form from 'src/components/Layout/Form'
+import Form from 'src/ui/Form'
 
 const CompanyForm = (props) => {
   const { currentUser } = useAuth()

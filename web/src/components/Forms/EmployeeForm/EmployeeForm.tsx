@@ -1,5 +1,5 @@
 import { TextField } from '@redwoodjs/forms'
-import Form from 'src/components/Layout/Form'
+import Form from 'src/ui/Form'
 
 const EmployeeForm = (props) => {
   const onSubmit = (data) => {

@@ -1,7 +1,7 @@
 import type { ContactsQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
-import Loader from 'src/components/Elements/Loader'
+import Loader from 'src/ui/Loader'
 import Table from 'src/components/Layout/Table'
 
 export const QUERY = gql`

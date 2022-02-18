@@ -3,7 +3,7 @@ import { FieldError, Label, Submit } from '@redwoodjs/forms'
 import ConditionalWrapper from 'src/components/Elements/ConditionalWrapper'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 
-import type { FormField } from 'src/components/Layout/Form'
+import type { FormField } from 'src/ui/Form'
 
 interface DescriptionListItemProps {
   first?: boolean
