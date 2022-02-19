@@ -88,13 +88,13 @@ const Navbar = (props: NavbarProps) => {
             <div>
               <Menu.Button
                 className={`${
-                  currentUser.profileImage
+                  currentUser?.profileImage
                     ? 'flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                     : 'rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                 }`}
               >
                 <span className="sr-only">Open user menu</span>
-                {currentUser.profileImage ? (
+                {currentUser?.profileImage ? (
                   <img
                     className="h-8 w-8 rounded-full"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
