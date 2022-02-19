@@ -52,6 +52,7 @@ const queryOptions: QueryOption[] = [
   },
   { id: 'expense', fields: ['id', 'name'], title: ['name'] },
   { id: 'income', fields: ['id', 'name'], title: ['name'] },
+  { id: 'invoice', fields: ['id'], title: ['id'] },
   { id: 'job', fields: ['id', 'title', 'description'], title: ['title'] },
   { id: 'organization', subSearches: ['employee', 'department'] },
   { id: 'project', fields: ['id', 'title', 'description'], title: ['title'] },

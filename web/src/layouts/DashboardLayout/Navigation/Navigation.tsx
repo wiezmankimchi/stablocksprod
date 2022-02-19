@@ -121,7 +121,16 @@ const Navigation = () => {
         {
           name: 'Accounting',
           to: routes.accounting(),
-          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
+          conditional:
+            !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
+              ? false
+              : true,
+        },
+        {
+          name: 'Invoices',
+          to: routes.invoices(),
+          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -130,7 +139,7 @@ const Navigation = () => {
         {
           name: 'Income',
           to: routes.incomes(),
-          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false
@@ -139,7 +148,7 @@ const Navigation = () => {
         {
           name: 'Expenses',
           to: routes.expenses(),
-          authorized: useAuthorization(['admin', 'hrAdmin', 'hr']),
+          authorized: useAuthorization(['admin', 'financeAdmin', 'finance']),
           conditional:
             !process.env.PLAID_CLIENT_ID || !process.env.PLAID_SECRET
               ? false

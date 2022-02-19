@@ -2,22 +2,22 @@ import { useState } from 'react'
 import { routes } from '@redwoodjs/router'
 import PageTitle from 'src/ui/PageTitle'
 import Popup from 'src/components/Elements/Popup'
-import NewIncome from 'src/components/Finance/Income/NewIncome'
-import IncomesCell from 'src/components/Finance/Income/IncomesCell'
+import NewInvoice from 'src/components/Finance/Invoice/NewInvoice'
+import InvoicesCell from 'src/components/Finance/Invoice/InvoicesCell'
 import { PlusSmIcon } from '@heroicons/react/outline'
 
-const IncomesPage = () => {
+const InvoicesPage = () => {
   const [isNewOpen, setIsNewOpen] = useState(false)
 
   return (
     <>
       <PageTitle
-        title="Income"
+        title="Invoices"
         breadcrumbs={[{ title: 'Finance', to: routes.finance() }]}
-        search={{ label: 'income', type: 'income' }}
+        search={{ label: 'invoices', type: 'invoice' }}
         buttons={[
           {
-            label: 'New Income',
+            label: 'New Invoice',
             icon: PlusSmIcon,
             onClick: () => setIsNewOpen(true),
             main: true,
@@ -25,13 +25,13 @@ const IncomesPage = () => {
         ]}
       />
 
-      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New income">
-        <NewIncome setOpen={setIsNewOpen} />
+      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New invoice">
+        <NewInvoice setOpen={setIsNewOpen} />
       </Popup>
 
-      <IncomesCell />
+      <InvoicesCell />
     </>
   )
 }
 
-export default IncomesPage
+export default InvoicesPage
