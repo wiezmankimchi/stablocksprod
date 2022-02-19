@@ -34,13 +34,14 @@ function classNames(...classes: string[]) {
 
 function createTo(type: string, value: string) {
   const paths = [
+    { type: 'application', to: routes.application({ id: value }) },
     { type: 'company', to: routes.company({ id: value }) },
     { type: 'contact', to: routes.contact({ id: value }) },
     { type: 'department', to: routes.department({ id: value }) },
     { type: 'employee', to: routes.employee({ id: value }) },
     // { type: 'expense', to: routes.expense({ id: value }) },
     // { type: 'income', to: routes.income({ id: value }) },
-    // { type: 'job', to: routes.job({ id: value }) },
+    { type: 'job', to: routes.job({ id: value }) },
     { type: 'project', to: routes.project({ id: value }) },
     { type: 'task', to: routes.task({ id: value }) },
     { type: 'ticket', to: routes.ticket({ id: parseInt(value) }) },

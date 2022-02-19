@@ -17,6 +17,11 @@ type QueryOption = {
 
 const queryOptions: QueryOption[] = [
   {
+    id: 'application',
+    fields: ['id'],
+    title: 'id',
+  },
+  {
     id: 'company',
     fields: ['id', 'name', 'website'],
     title: ['name'],

@@ -47,8 +47,12 @@ const Routes = () => {
                   <Route path="/helpdesk" page={HelpdeskHelpdeskPage} name="helpdesk" />
                 </Private>
 
-                <Private unauthenticated="home" role={['admin', 'financeAdmin', 'finance']}>
+                <Private unauthenticated="home" role={['admin', 'recruitingAdmin', 'recruiting']}>
+                  <Route path="/recruiting/applications/{id}/edit" page={RecruitingApplicationEditApplicationPage} name="editApplication" />
+                  <Route path="/recruiting/applications/{id}" page={RecruitingApplicationApplicationPage} name="application" />
                   <Route path="/recruiting/applications" page={RecruitingApplicationApplicationsPage} name="applications" />
+                  <Route path="/recruiting/jobs/{id}/edit" page={RecruitingJobEditJobPage} name="editJob" />
+                  <Route path="/recruiting/jobs/{id}" page={RecruitingJobJobPage} name="job" />
                   <Route path="/recruiting/jobs" page={RecruitingJobJobsPage} name="jobs" />
                   <Route path="/recruiting" page={RecruitingRecruitingPage} name="recruiting" />
                 </Private>
