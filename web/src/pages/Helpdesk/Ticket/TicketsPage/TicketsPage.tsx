@@ -25,7 +25,7 @@ const TicketsPage = () => {
         ]}
       />
 
-      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New project">
+      <Popup isOpen={isNewOpen} setIsOpen={setIsNewOpen} title="New ticket">
         <NewTicket setOpen={setIsNewOpen} />
       </Popup>
 
