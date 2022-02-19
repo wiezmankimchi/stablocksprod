@@ -8,6 +8,8 @@ import Loader from 'src/ui/Loader'
 import PageTitle from 'src/ui/PageTitle'
 import OrganizationForm from '../OrganizationForm'
 
+import { QUERY as APP_PROVIDER_QUERY } from 'src/components/Providers/AppProviderCell'
+
 export const QUERY = gql`
   query FindEditOrganizationQuery {
     organization {
@@ -71,7 +73,7 @@ export const Success = ({
         setIsSaved(true)
         toast.success('Organization updated')
       },
-      refetchQueries: [{ query: QUERY }],
+      refetchQueries: [{ query: APP_PROVIDER_QUERY }, { query: QUERY }],
       awaitRefetchQueries: true,
       onError: (error) => {
         toast.error(error.message)
