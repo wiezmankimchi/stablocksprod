@@ -44,6 +44,6 @@ export const updateRole = ({ id, input }: UpdateRoleArgs) => {
 // }
 
 export const Role = {
-  user: (_obj, { root }: ResolverArgs<ReturnType<typeof role>>) =>
-    db.role.findUnique({ where: { id: root.id } }).user(),
+  employee: (_obj, { root }: ResolverArgs<ReturnType<typeof role>>) =>
+    db.role.findUnique({ where: { id: root.id } }).employee(),
 }

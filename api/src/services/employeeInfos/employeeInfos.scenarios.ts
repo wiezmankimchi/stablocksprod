@@ -1,31 +1,31 @@
 import type { Prisma } from '@prisma/client'
 
-export const standard = defineScenario<Prisma.TicketCreateArgs>({
-  ticket: {
+export const standard = defineScenario<Prisma.EmployeeInfoCreateArgs>({
+  employeeInfo: {
     one: {
       data: {
-        title: 'String',
-        updatedAt: '2022-03-23T23:03:33Z',
+        position: 'String',
+        updatedAt: '2022-03-23T23:00:01Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String9218411',
-            updatedAt: '2022-03-23T23:03:33Z',
+            email: 'String1763027',
+            updatedAt: '2022-03-23T23:00:01Z',
           },
         },
       },
     },
     two: {
       data: {
-        title: 'String',
-        updatedAt: '2022-03-23T23:03:33Z',
+        position: 'String',
+        updatedAt: '2022-03-23T23:00:01Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String5147770',
-            updatedAt: '2022-03-23T23:03:33Z',
+            email: 'String1872918',
+            updatedAt: '2022-03-23T23:00:01Z',
           },
         },
       },

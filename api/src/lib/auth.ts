@@ -1,4 +1,3 @@
-import { parseJWT } from '@redwoodjs/api'
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
 import { db } from 'src/lib/db'
 
@@ -42,20 +41,30 @@ export const getCurrentUser = async (
 
   const fetchedUser = await db.user.findUnique({
     where: { email: decoded.email },
-    include: {
-      roles: true,
+    select: {
+      employee: {
+        select: {
+          roles: true,
+        },
+      },
     },
   })
 
   if (fetchedUser) {
     user = fetchedUser
 
-    if (fetchedUser.roles) {
-      for (const key in fetchedUser.roles) {
-        if (Object.prototype.hasOwnProperty.call(fetchedUser.roles, key)) {
-          const element = fetchedUser.roles[key]
+    // Add user id and type
+    roles.push(fetchedUser.id)
+    roles.push(fetchedUser?.type)
 
-          if (element === true) roles.push(key)
+    if (fetchedUser?.employee?.roles) {
+      for (const key in fetchedUser.employee.roles) {
+        if (
+          Object.prototype.hasOwnProperty.call(fetchedUser.employee.roles, key)
+        ) {
+          const role = fetchedUser.employee.roles[key]
+
+          if (role === true) roles.push(key)
         }
       }
     }
