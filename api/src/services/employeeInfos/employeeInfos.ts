@@ -7,9 +7,11 @@ export const employeeInfos = () => {
   return db.employeeInfo.findMany()
 }
 
-export const employeeInfo = ({ id }: Prisma.EmployeeInfoWhereUniqueInput) => {
+export const employeeInfo = ({
+  userId,
+}: Prisma.EmployeeInfoWhereUniqueInput) => {
   return db.employeeInfo.findUnique({
-    where: { id },
+    where: { userId },
   })
 }
 
@@ -27,68 +29,92 @@ interface UpdateEmployeeInfoArgs extends Prisma.EmployeeInfoWhereUniqueInput {
   input: Prisma.EmployeeInfoUpdateInput
 }
 
-export const updateEmployeeInfo = ({ id, input }: UpdateEmployeeInfoArgs) => {
+export const updateEmployeeInfo = ({
+  userId,
+  input,
+}: UpdateEmployeeInfoArgs) => {
   return db.employeeInfo.update({
     data: input,
-    where: { id },
+    where: { userId },
   })
 }
 
 export const deleteEmployeeInfo = ({
-  id,
+  userId,
 }: Prisma.EmployeeInfoWhereUniqueInput) => {
   return db.employeeInfo.delete({
-    where: { id },
+    where: { userId },
   })
 }
 
 export const EmployeeInfo = {
   user: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).user(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).user(),
   roles: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).roles(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).roles(),
   address: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).address(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).address(),
   supervisor: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).supervisor(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).supervisor(),
   employees: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).employees(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).employees(),
   departments: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).departments(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .departments(),
   pay: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).pay(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).pay(),
   jobs: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).jobs(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).jobs(),
   contacts: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).contacts(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).contacts(),
   contactNotes: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).contactNotes(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .contactNotes(),
   companies: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).companies(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).companies(),
   ticketsAssigned: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).ticketsAssigned(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .ticketsAssigned(),
   chatsAssigned: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).chatsAssigned(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .chatsAssigned(),
   projects: (_obj, { root }: ResolverArgs<ReturnType<typeof employeeInfo>>) =>
-    db.employeeInfo.findUnique({ where: { id: root.id } }).projects(),
+    db.employeeInfo.findUnique({ where: { userId: root.userId } }).projects(),
   tasksCreated: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).tasksCreated(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .tasksCreated(),
   tasksAssigned: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).tasksAssigned(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .tasksAssigned(),
   taskComments: (
     _obj,
     { root }: ResolverArgs<ReturnType<typeof employeeInfo>>
-  ) => db.employeeInfo.findUnique({ where: { id: root.id } }).taskComments(),
+  ) =>
+    db.employeeInfo
+      .findUnique({ where: { userId: root.userId } })
+      .taskComments(),
 }

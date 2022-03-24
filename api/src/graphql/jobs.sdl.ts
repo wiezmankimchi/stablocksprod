@@ -3,15 +3,15 @@ export const schema = gql`
     id: String!
     title: String!
     description: String!
-    employee: EmployeeInfo!
-    employeeId: String!
-    applications: [Application]!
+    employee: EmployeeInfo! @requireAuth
+    employeeId: String! @requireAuth
+    applications: [Application]! @requireAuth
     updatedAt: DateTime!
     createdAt: DateTime!
   }
 
   type Query {
-    jobs: [Job!]! @requireAuth
+    jobs: [Job!]! @skipAuth
     job(id: String!): Job @requireAuth
   }
 

@@ -33,24 +33,22 @@ describe('employeeInfos', () => {
     const result = await createEmployeeInfo({
       input: {
         userId: scenario.employeeInfo.two.userId,
-        position: 'String',
-        updatedAt: '2022-03-23T23:00:01Z',
+        updatedAt: '2022-03-23T23:59:18Z',
       },
     })
 
     expect(result.userId).toEqual(scenario.employeeInfo.two.userId)
-    expect(result.position).toEqual('String')
-    expect(result.updatedAt).toEqual('2022-03-23T23:00:01Z')
+    expect(result.updatedAt).toEqual('2022-03-23T23:59:18Z')
   })
 
   scenario('updates a employeeInfo', async (scenario: StandardScenario) => {
     const original = await employeeInfo({ id: scenario.employeeInfo.one.id })
     const result = await updateEmployeeInfo({
       id: original.id,
-      input: { position: 'String2' },
+      input: { updatedAt: '2022-03-24T23:59:18Z' },
     })
 
-    expect(result.position).toEqual('String2')
+    expect(result.updatedAt).toEqual('2022-03-24T23:59:18Z')
   })
 
   scenario('deletes a employeeInfo', async (scenario: StandardScenario) => {

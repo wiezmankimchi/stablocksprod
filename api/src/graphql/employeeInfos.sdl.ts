@@ -3,7 +3,7 @@ export const schema = gql`
     user: User!
     userId: String!
     roles: Role
-    position: String!
+    position: String
     altEmail: String
     address: Address
     addressId: String
@@ -33,7 +33,7 @@ export const schema = gql`
 
   input CreateEmployeeInfoInput {
     userId: String!
-    position: String!
+    position: String
     altEmail: String
     addressId: String
     supervisorId: String

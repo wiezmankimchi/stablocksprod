@@ -4,28 +4,26 @@ export const standard = defineScenario<Prisma.EmployeeInfoCreateArgs>({
   employeeInfo: {
     one: {
       data: {
-        position: 'String',
-        updatedAt: '2022-03-23T23:00:01Z',
+        updatedAt: '2022-03-23T23:59:18Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String1763027',
-            updatedAt: '2022-03-23T23:00:01Z',
+            email: 'String9724458',
+            updatedAt: '2022-03-23T23:59:18Z',
           },
         },
       },
     },
     two: {
       data: {
-        position: 'String',
-        updatedAt: '2022-03-23T23:00:01Z',
+        updatedAt: '2022-03-23T23:59:18Z',
         user: {
           create: {
             firstName: 'String',
             lastName: 'String',
-            email: 'String1872918',
-            updatedAt: '2022-03-23T23:00:01Z',
+            email: 'String8161439',
+            updatedAt: '2022-03-23T23:59:18Z',
           },
         },
       },

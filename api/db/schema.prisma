@@ -60,7 +60,7 @@ model EmployeeInfo {
   userId          String         @id
   // Essentials
   roles           Role?
-  position        String
+  position        String?
   altEmail        String?
   address         Address?       @relation(fields: [addressId], references: [id])
   addressId       String?        @unique

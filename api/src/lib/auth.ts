@@ -42,6 +42,11 @@ export const getCurrentUser = async (
   const fetchedUser = await db.user.findUnique({
     where: { email: decoded.email },
     select: {
+      id: true,
+      type: true,
+      firstName: true,
+      lastName: true,
+      email: true,
       employee: {
         select: {
           roles: true,
@@ -51,7 +56,12 @@ export const getCurrentUser = async (
   })
 
   if (fetchedUser) {
-    user = fetchedUser
+    user = {
+      id: fetchedUser.id,
+      firstName: fetchedUser.firstName,
+      lastName: fetchedUser.lastName,
+      email: fetchedUser.email,
+    }
 
     // Add user id and type
     roles.push(fetchedUser.id)
